@@ -19,15 +19,21 @@
     <!-- Hero Section -->
 <header class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden bg-[#0a0a0a]">
     
-    <!-- Background Animado -->
-    <div class="absolute inset-0 z-0">
-        <!-- Substitua a URL abaixo pela sua imagem de setup, câmera ou textura cinematográfica -->
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492691523567-6119e7659df3?q=80&w=2070&auto=format&fit=crop')] 
-                    bg-cover bg-center opacity-20 animate-ken-burns"></div>
-        
-        <!-- Overlay de Gradiente para leitura -->
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/60 to-[#0a0a0a]"></div>
-    </div>
+    <!-- Background com Vídeo -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+    <!-- O vídeo deve estar em loop, mudo e com playsinline para rodar no celular -->
+    <video 
+        autoplay 
+        muted 
+        loop 
+        playsinline 
+        class="absolute inset-0 w-full h-full object-cover opacity-20">
+        <source src="fundoo.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Overlay de Gradiente para manter o texto legível -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/50 to-[#0a0a0a]"></div>
+</div>
     
     <!-- Conteúdo Principal -->
     <div class="z-10 flex flex-col items-center">
@@ -246,7 +252,7 @@
                 <video 
                     id="video3"
                     class="w-full h-full object-cover cursor-pointer"
-                    poster="img/tokyo.jpeg" 
+                    poster="img/Tokyo.jpeg" 
                     playsinline
                 >
                     <source src="videos/Tokyo.mp4" type="video/mp4">
@@ -286,7 +292,7 @@
 <section id="contato" class="py-32 bg-gradient-to-t from-red-950/20 to-transparent">
     <div class="max-w-4xl mx-auto px-4 text-center">
         <h2 class="text-5xl font-bold mb-6">Ficou interessado?</h2>
-        <p class="text-xl text-zinc-400 mb-12">Fique a vontade pra me chamar :)</p>
+        <p class="text-xl text-zinc-400 mb-12">Entre em contato por meio de uma das plataformas abaixo</p>
         
         <div class="flex justify-center gap-6">
             
@@ -302,10 +308,10 @@
                 <span class="text-xs uppercase font-bold">Email</span>
             </a>
             
-            <!-- X / TWITTER -->
-            <a href="https://x.com/tauanlp" target="_blank" class="glass p-6 rounded-2xl hover:scale-110 transition flex flex-col items-center gap-3 w-32">
-                <i class="fa-brands fa-x-twitter text-3xl"></i>
-                <span class="text-xs uppercase font-bold">X / Twitter</span>
+            <!-- BEHANCE -->
+            <a href="https://be.net/tauansenaa" target="_blank" class="glass p-6 rounded-2xl hover:scale-110 transition flex flex-col items-center gap-3 w-32">
+                <i class="fa-brands fa-behance text-3xl"></i>
+                <span class="text-xs uppercase font-bold">BEHANCE</span>
             </a>
 
         </div>
