@@ -16,47 +16,58 @@
 </head>
 <body>
 
-    <!-- Hero Section -->
-<header class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden bg-[#0a0a0a]">
+  <!-- Hero Section -->
+<header class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden bg-[#0a0a0a]">
     
-    <!-- Background com Vídeo -->
-<div class="absolute inset-0 z-0 overflow-hidden">
-    <!-- O vídeo deve estar em loop, mudo e com playsinline para rodar no celular -->
-    <video 
-        autoplay 
-        muted 
-        loop 
-        playsinline 
-        class="absolute inset-0 w-full h-full object-cover opacity-20">
-        <source src="fundoo.mp4" type="video/mp4">
-    </video>
-    
-    <!-- Overlay de Gradiente para manter o texto legível -->
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/50 to-[#0a0a0a]"></div>
-</div>
+    <!-- Container da Imagem Parallax -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+        <div id="parallax-bg" 
+             class="absolute inset-0 w-full h-[120%] bg-[url('https://blog.fmctraining.com/hubfs/image-png-4.png')] bg-cover bg-center opacity-20 will-change-transform">
+        </div>
+        
+        <!-- Overlay de Gradiente para o topo e base -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]"></div>
+    </div>
     
     <!-- Conteúdo Principal -->
-    <div class="z-10 flex flex-col items-center">
-        <!-- Animação de fade-up -->
-        <div class="animate-fade-in-up">
-            <h1 class="text-5xl md:text-8xl font-bold mb-4 tracking-tighter leading-none">
-                TAUAN <span class="text-red-600">SENA</span>
-            </h1>
-            <p class="text-lg md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto font-light">
-                Editor de vídeo e assistente de câmera.
-            </p>
-        </div>
-
-        <!-- Botões Responsivos -->
-        <div class="flex flex-col sm:flex-row gap-4 w-full justify-center animate-fade-in-up-delayed">
-            <a href="#trabalhos" class="red-gradient px-10 py-4 rounded-full font-bold hover:scale-105 transition-all duration-300 shadow-lg shadow-red-600/20 text-center">
+    <div class="z-10 animate-fade-in-up">
+        <h1 class="text-5xl md:text-8xl font-bold mb-4 tracking-tighter">
+            TAUAN <span class="text-red-600">SENA</span>
+        </h1>
+        <p class="text-lg md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto font-light font-poppins">
+            Editor de vídeo e assistente de câmera.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#trabalhos" class="bg-red-600 px-10 py-4 rounded-full font-bold hover:scale-105 transition-all duration-300 shadow-lg shadow-red-600/20">
                 Ver Trabalhos
             </a>
-            <a href="#contato" class="bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-gray-200 transition-all duration-300 hover:scale-105 text-center">
+            <a href="#contato" class="bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-gray-200 transition-all duration-300 hover:scale-105">
                 Contratar Agora
             </a>
         </div>
     </div>
+
+<style>
+/* Animação de respiração para o botão vermelho */
+@keyframes breathe-red {
+    0%, 100% { box-shadow: 0 0 5px rgba(220, 38, 38, 0.2), 0 0 10px rgba(220, 38, 38, 0.1); }
+    50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.6), 0 0 35px rgba(220, 38, 38, 0.3); }
+}
+
+/* Animação de respiração para o botão branco */
+@keyframes breathe-white {
+    0%, 100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.1), 0 0 10px rgba(255, 255, 255, 0.05); }
+    50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 35px rgba(255, 255, 255, 0.2); }
+}
+
+.animate-glow-red {
+    animation: breathe-red 1s infinite ease-in-out;
+}
+
+.animate-glow-white {
+    animation: breathe-white 1s infinite ease-in-out;
+}
+</style>
 
     <!-- Indicador de Scroll (Extra para elegância) -->
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
@@ -102,6 +113,11 @@
 }
 </style>
 </header>
+
+    <!-- Indicador de Scroll (Extra para elegância) -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
+        <i class="fa-solid fa-chevron-down text-2xl"></i>
+    </div>
 
     <!-- Trabalhos -->
     <section id="trabalhos" class="py-20 max-w-7xl mx-auto px-4">
@@ -321,6 +337,25 @@
 <footer class="py-10 border-t border-zinc-900 text-center text-gray-600 text-sm">
     &copy; 2026 Tauan Sena. Todos os direitos reservados.
 </footer>
-
+<script>
+    window.addEventListener('scroll', function() {
+        const parallax = document.getElementById('parallax-bg');
+        let scrollPosition = window.pageYOffset;
+        
+        // O valor 0.4 controla a velocidade do parallax. 
+        // Quanto menor, mais lento e sutil é o movimento.
+        parallax.style.transform = 'translateY(' + (scrollPosition * 0.4) + 'px)';
+    });
+</script>
+<script>
+    window.addEventListener('scroll', function() {
+        const parallax = document.getElementById('parallax-bg');
+        let scrollPosition = window.pageYOffset;
+        
+        // O valor 0.4 controla a velocidade do parallax. 
+        // Quanto menor, mais lento e sutil é o movimento.
+        parallax.style.transform = 'translateY(' + (scrollPosition * 0.4) + 'px)';
+    });
+</script>
 </body>
 </html>
