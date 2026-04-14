@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tauan Sena | Editor de Vídeo & Assistente de Câmera</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #0a0a0a; color: white; font-family: 'Inter', sans-serif; }
+        .video-card:hover .overlay { opacity: 1; }
+        .red-gradient { background: linear-gradient(90deg, #ff0000 0%, #8b0000 100%); }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+<header class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden bg-[#0a0a0a]">
+    
+    <!-- Background Animado -->
+    <div class="absolute inset-0 z-0">
+        <!-- Substitua a URL abaixo pela sua imagem de setup, câmera ou textura cinematográfica -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492691523567-6119e7659df3?q=80&w=2070&auto=format&fit=crop')] 
+                    bg-cover bg-center opacity-20 animate-ken-burns"></div>
+        
+        <!-- Overlay de Gradiente para leitura -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0a0a]/60 to-[#0a0a0a]"></div>
+    </div>
+    
+    <!-- Conteúdo Principal -->
+    <div class="z-10 flex flex-col items-center">
+        <!-- Animação de fade-up -->
+        <div class="animate-fade-in-up">
+            <h1 class="text-5xl md:text-8xl font-bold mb-4 tracking-tighter leading-none">
+                TAUAN <span class="text-red-600">SENA</span>
+            </h1>
+            <p class="text-lg md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto font-light">
+                Editor de vídeo e assistente de câmera.
+            </p>
+        </div>
+
+        <!-- Botões Responsivos -->
+        <div class="flex flex-col sm:flex-row gap-4 w-full justify-center animate-fade-in-up-delayed">
+            <a href="#trabalhos" class="red-gradient px-10 py-4 rounded-full font-bold hover:scale-105 transition-all duration-300 shadow-lg shadow-red-600/20 text-center">
+                Ver Trabalhos
+            </a>
+            <a href="#contato" class="bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-gray-200 transition-all duration-300 hover:scale-105 text-center">
+                Contratar Agora
+            </a>
+        </div>
+    </div>
+
+    <!-- Indicador de Scroll (Extra para elegância) -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
+        <i class="fa-solid fa-chevron-down text-2xl"></i>
+    </div>
+<style>
+/* Animação do Background (Zoom Lento) */
+@keyframes kenburns {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+.animate-ken-burns {
+    animation: kenburns 30s infinite ease-in-out;
+}
+
+/* Animação de entrada dos textos */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.animate-fade-in-up-delayed {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.4s forwards;
+}
+
+/* Gradiente Vermelho Customizado */
+.red-gradient {
+    background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+    color: white;
+}
+</style>
+</header>
+
+    <!-- Trabalhos -->
+    <section id="trabalhos" class="py-20 max-w-7xl mx-auto px-4">
+        <div class="flex items-center gap-4 mb-12">
+            <div class="w-1 h-10 bg-red-600"></div>
+            <h2 class="text-4xl font-bold italic uppercase">Trabalhos</h2>
+        </div>
+
+<!-- Container da Grid (abra apenas UMA vez) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- Card de Vídeo 01 -->
+    <a href="https://youtube.com/watch?v=9BqaW2dIcC0" target="_blank" rel="noopener" class="video-card relative group rounded-xl overflow-hidden cursor-pointer shadow-2xl aspect-video">
+        <img src="https://img.youtube.com/vi/9BqaW2dIcC0/maxresdefault.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+        <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+            <button class="bg-red-600 p-4 rounded-full text-white text-2xl shadow-lg">▶</button>
+            <span class="absolute bottom-4 left-4 font-bold uppercase tracking-wider text-white">Assista</span>
+        </div>
+    </a>
+
+    <!-- Card de Vídeo 02 (Basta copiar do <a até o </a>) -->
+    <a href="https://youtu.be/2Ftmy05DuR4" target="_blank" rel="noopener" class="video-card relative group rounded-xl overflow-hidden cursor-pointer shadow-2xl aspect-video">
+        <img src="https://i3.ytimg.com/vi/2Ftmy05DuR4/hqdefault.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+        <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+            <button class="bg-red-600 p-4 rounded-full text-white text-2xl shadow-lg">▶</button>
+            <span class="absolute bottom-4 left-4 font-bold uppercase tracking-wider text-white">Assista</span>
+        </div>
+    </a>
+
+    <!-- Card de Vídeo 03 -->
+    <a href="https://www.youtube.com/watch?v=SHmI2ZvVeVc" target="_blank" rel="noopener" class="video-card relative group rounded-xl overflow-hidden cursor-pointer shadow-2xl aspect-video">
+        <img src="https://img.youtube.com/vi/SHmI2ZvVeVc/maxresdefault.jpg" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+        <div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+            <button class="bg-red-600 p-4 rounded-full text-white text-2xl shadow-lg">▶</button>
+            <span class="absolute bottom-4 left-4 font-bold uppercase tracking-wider text-white">Assista</span>
+        </div>
+    </a>
+
+</div> <!-- Fecha a Grid apenas no final -->
+	
+	
+ 
+	
+
+    </section>
+
+   <!-- Canais que já editei -->
+<section class="py-20 bg-zinc-950">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-12">Canais que já editei</h2>
+        
+        <!-- Removi a opacidade do container pai para controlar individualmente -->
+        <div class="flex flex-wrap justify-center gap-8">
+            
+            <!-- Canal Item 01 -->
+<a href="https://www.youtube.com/@dilera" target="_blank" rel="noopener">
+            <div class="flex flex-col items-center gap-2 group cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300">
+                <div class="w-20 h-20 rounded-full border-2 border-zinc-800 p-1 transition-all duration-300 
+                            group-hover:border-red-600 group-hover:scale-110 
+                            group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)]">
+                    <img src="https://yt3.googleusercontent.com/5EhGV7VUEVzMtn07yEkiTOR8AYJQ-d-PZs0nBs_aSdJ-jbB3-yudn5hDj33ldcLwv8wNYIwg=s160-c-k-c0x00ffffff-no-rj" class="rounded-full w-full h-full object-cover">
+                </div>
+                <span class="text-sm text-gray-400 group-hover:text-white transition-colors">Dilera</span>
+            </div>
+	</a>
+
+            <!-- Canal Item 02 -->
+<a href="https://www.youtube.com/@redbull" target="_blank" rel="noopener">
+            <div class="flex flex-col items-center gap-2 group cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300">
+                <div class="w-20 h-20 rounded-full border-2 border-zinc-800 p-1 transition-all duration-300 
+                            group-hover:border-red-600 group-hover:scale-110 
+                            group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)]">
+                    <img src="https://yt3.googleusercontent.com/ytc/AIdro_k94J7kkxpmlJe3c2iDFJpHk8SAADPpf49cN7XjomXSzEE=s160-c-k-c0x00ffffff-no-rj" class="rounded-full w-full h-full object-cover">
+                </div>
+                <span class="text-sm text-gray-400 group-hover:text-white transition-colors">Red Bull</span>
+            </div>
+	</a>
+            <!-- Canal Item 03 -->
+<a href="https://www.youtube.com/@brasil" target="_blank" rel="noopener">
+            <div class="flex flex-col items-center gap-2 group cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300">
+                <div class="w-20 h-20 rounded-full border-2 border-zinc-800 p-1 transition-all duration-300 
+                            group-hover:border-red-600 group-hover:scale-110 
+                            group-hover:shadow-[0_0_20px_rgba(220,38,38,0.5)]">
+                    <img src="https://yt3.googleusercontent.com/ytc/AIdro_lGr-WYSe5SfEY765ddXowIwIwBxjp4fsFnBbtuefUK7-w=s160-c-k-c0x00ffffff-no-rj" class="rounded-full w-full h-full object-cover">
+                </div>
+                <span class="text-sm text-gray-400 group-hover:text-white transition-colors">CBF</span>
+            </div>
+	</a>
+        </div>
+    </div>
+</section>
+
+   <!-- Seção de Shorts Atualizada -->
+<section class="py-20 max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-2 uppercase italic">Shorts</h2>
+        <p class="font-poppins font-light text-gray-500 text-lg"> Edições verticais para TikTok, Reels e Shorts </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card de Short 01 -->
+        <div class="glass p-4 rounded-3xl group transition hover:bg-white/10">
+            <div class="aspect-[9/16] bg-black rounded-2xl mb-4 overflow-hidden relative shadow-2xl">
+                <!-- O VÍDEO LOCAL -->
+                <video 
+                    id="video1"
+                    class="w-full h-full object-cover cursor-pointer"
+                    poster="img/unidom.jpeg" 
+                    playsinline
+                >
+                    <source src="videos/Unidom.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+                
+                <!-- Botão de Play Visual (Desaparece ao tocar) -->
+                <div id="playBtn1" onclick="playVideo('video1', 'playBtn1')" class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition duration-300 cursor-pointer">
+                    <i class="fa-solid fa-play text-5xl text-white drop-shadow-lg group-hover:scale-125 transition"></i>
+                </div>
+            </div>
+        </div>
+
+ <!-- Card de Short 01 -->
+        <div class="glass p-4 rounded-3xl group transition hover:bg-white/10">
+            <div class="aspect-[9/16] bg-black rounded-2xl mb-4 overflow-hidden relative shadow-2xl">
+                <!-- O VÍDEO LOCAL -->
+                <video 
+                    id="video2"
+                    class="w-full h-full object-cover cursor-pointer"
+                    poster="img/cbf.jpeg" 
+                    playsinline
+                >
+                    <source src="videos/CBF.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+                
+                <!-- Botão de Play Visual (Desaparece ao tocar) -->
+                <div id="playBtn2" onclick="playVideo('video2', 'playBtn2')" class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition duration-300 cursor-pointer">
+                    <i class="fa-solid fa-play text-5xl text-white drop-shadow-lg group-hover:scale-125 transition"></i>
+                </div>
+            </div>
+        </div>
+
+ <!-- Card de Short 01 -->
+        <div class="glass p-4 rounded-3xl group transition hover:bg-white/10">
+            <div class="aspect-[9/16] bg-black rounded-2xl mb-4 overflow-hidden relative shadow-2xl">
+                <!-- O VÍDEO LOCAL -->
+                <video 
+                    id="video3"
+                    class="w-full h-full object-cover cursor-pointer"
+                    poster="img/Tokyo.jpeg" 
+                    playsinline
+                >
+                    <source src="videos/Tokyo.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+                
+                <!-- Botão de Play Visual (Desaparece ao tocar) -->
+                <div id="playBtn3" onclick="playVideo('video3', 'playBtn3')" class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/0 transition duration-300 cursor-pointer">
+                    <i class="fa-solid fa-play text-5xl text-white drop-shadow-lg group-hover:scale-125 transition"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Repita o bloco acima para o Short 02 e 03, mudando os IDs (video2, playBtn2, etc) -->
+
+    </div>
+</section>
+
+<!-- Script para controlar o Play/Pause ao clicar -->
+<script>
+    function playVideo(videoId, btnId) {
+        const video = document.getElementById(videoId);
+        const btn = document.getElementById(btnId);
+
+        if (video.paused) {
+            video.play();
+            btn.style.opacity = "0"; // Esconde o botão ao dar play
+            video.controls = true;    // Mostra os controles nativos (volume, tempo) após o play
+        } else {
+            video.pause();
+            btn.style.opacity = "1"; // Mostra o botão ao pausar
+            video.controls = false;
+        }
+    }
+</script>
+
+   <!-- Contato -->
+<section id="contato" class="py-32 bg-gradient-to-t from-red-950/20 to-transparent">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-5xl font-bold mb-6">Ficou interessado?</h2>
+        <p class="text-xl text-zinc-400 mb-12">Entre em contato por meio de uma das plataformas abaixo</p>
+        
+        <div class="flex justify-center gap-6">
+            
+            <!-- INSTAGRAM (Alterado o ícone aqui) -->
+            <a href="https://www.instagram.com/tauansenaa/" target="_blank" class="glass p-6 rounded-2xl hover:scale-110 transition flex flex-col items-center gap-3 w-32">
+                <i class="fa-brands fa-instagram text-3xl"></i>
+                <span class="text-xs uppercase font-bold">Instagram</span>
+            </a>
+            
+            <!-- EMAIL -->
+            <a href="mailto:tauansena@gmail.com" class="glass p-6 rounded-2xl hover:scale-110 transition flex flex-col items-center gap-3 w-32">
+                <i class="fa-solid fa-envelope text-3xl"></i>
+                <span class="text-xs uppercase font-bold">Email</span>
+            </a>
+            
+            <!-- X / TWITTER -->
+            <a href="https://x.com/tauanlp" target="_blank" class="glass p-6 rounded-2xl hover:scale-110 transition flex flex-col items-center gap-3 w-32">
+                <i class="fa-brands fa-x-twitter text-3xl"></i>
+                <span class="text-xs uppercase font-bold">X / Twitter</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<footer class="py-10 border-t border-zinc-900 text-center text-gray-600 text-sm">
+    &copy; 2026 Tauan Sena. Todos os direitos reservados.
+</footer>
+
+</body>
+</html>
