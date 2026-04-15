@@ -48,36 +48,51 @@
 <body>
 
     <!-- Hero Section -->
-    <header
-        class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden bg-[#0a0a0a]">
+    <header class="relative h-screen flex items-center justify-center px-4 overflow-hidden bg-[#0a0a0a]">
 
-        <!-- Container da Imagem Parallax -->
+        <!-- Container do Vídeo Parallax -->
         <div class="absolute inset-0 z-0 overflow-hidden">
-            <div id="parallax-bg"
-                class="absolute inset-0 w-full h-[120%] bg-[url('https://blog.fmctraining.com/hubfs/image-png-4.png')] bg-cover bg-center opacity-20 will-change-transform">
-            </div>
+            <video id="parallax-bg" autoplay loop muted playsinline
+                class="absolute inset-0 w-full h-[120%] object-cover opacity-20 will-change-transform">
+                <source src="videos/Fundoo.mp4" type="video/mp4">
+            </video>
 
             <!-- Overlay de Gradiente para o topo e base -->
             <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]"></div>
         </div>
 
-        <!-- Conteúdo Principal -->
-        <div class="z-10 animate-fade-in-up">
-            <h1 class="text-5xl md:text-8xl font-bold mb-4 tracking-tighter">
-                TAUAN SENA
-            </h1>
-            <p class="text-lg md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto font-light font-poppins">
-                Editor de vídeo e assistente de câmera.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#trabalhos"
-                    class="bg-red-600 px-10 py-4 rounded-full font-bold hover:scale-105 transition-all duration-300 shadow-lg shadow-red-600/20">
-                    Ver Trabalhos
-                </a>
-                <a href="#contato"
-                    class="bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-gray-200 transition-all duration-300 hover:scale-105">
-                    Contratar Agora
-                </a>
+        <!-- Layout Grid para dividir a tela em duas metades -->
+        <div
+            class="z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-fade-in-up mt-16 md:mt-0">
+
+            <!-- Conteúdo Principal - Esquerda -->
+            <div class="w-full text-lg flex flex-col items-start justify-center">
+                <h1 class="text-5xl md:text-8xl font-bold mb-4 tracking-tighter">
+                    TAUAN SENA
+                </h1>
+                <p class="text-lg md:text-2xl text-gray-400 mb-10 max-w-2xl font-light font-poppins">
+
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#trabalhos"
+                        class="bg-red-600 px-10 py-4 rounded-full font-bold hover:scale-105 transition-all duration-300 shadow-lg shadow-red-600/20">
+                        Ver Trabalhos
+                    </a>
+                    <a href="#contato"
+                        class="bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-gray-200 transition-all duration-300 hover:scale-105">
+                        Contratar Agora
+                    </a>
+                </div>
+            </div>
+
+            <!-- Caixa de Vídeo com Glow Vermelho - Direita -->
+            <div
+                class="relative w-full aspect-video rounded-3xl overflow-hidden glass shadow-[0_0_50px_rgba(220,38,38,0.6)] border-2 border-red-900/50">
+                <!-- Você pode trocar o Src para o vídeo que desejar ser rodado em loop -->
+                <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                    <source src="videos/Caixinha.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
             </div>
         </div>
 
@@ -333,7 +348,7 @@
             <div class="glass p-4 rounded-3xl group transition hover:bg-white/10">
                 <div class="aspect-[9/16] bg-black rounded-2xl mb-4 overflow-hidden relative shadow-2xl">
                     <!-- O VÍDEO LOCAL -->
-                    <video id="video3" class="w-full h-full object-cover cursor-pointer" poster="img/tokyo.jpeg"
+                    <video id="video3" class="w-full h-full object-cover cursor-pointer" poster="img/Tokyo.jpeg"
                         playsinline>
                         <source src="videos/Tokyo.mp4" type="video/mp4">
                         Seu navegador não suporta vídeos.
