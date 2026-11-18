@@ -49,11 +49,57 @@
 
     <!-- ===================== CAPA ===================== -->
     <header class="capa">
+        <!-- Fundo da capa: luz atrás da carta 00 e uma timeline de edição deitada em perspectiva (só CSS) -->
+        <div class="capa__fundo" aria-hidden="true">
+            <div class="timeline">
+                <div class="timeline__regua">
+                    <span>00:00:00:00</span><span>00:00:04:12</span><span>00:00:09:00</span><span>00:00:13:12</span><span>00:00:18:00</span><span>00:00:22:12</span>
+                </div>
+                <div class="timeline__trilha" data-nome="V3">
+                    <i class="clip clip--papel" style="--x:8;--w:9">TÍTULO</i>
+                    <i class="clip clip--papel" style="--x:44;--w:7">LEGENDA</i>
+                    <i class="clip clip--papel" style="--x:78;--w:10">LETTERING</i>
+                </div>
+                <div class="timeline__trilha" data-nome="V2">
+                    <i class="clip clip--lilas" style="--x:3;--w:14">B-ROLL_03</i>
+                    <i class="clip clip--lilas clip--figurinha" style="--x:30;--w:11">INSERT</i>
+                    <i class="clip clip--lilas" style="--x:55;--w:18">DRONE_012</i>
+                    <i class="clip clip--lilas" style="--x:86;--w:12">CLOSE</i>
+                </div>
+                <div class="timeline__trilha" data-nome="V1">
+                    <i class="clip clip--laranja" style="--x:0;--w:12">A001_C004</i>
+                    <i class="clip clip--laranja" style="--x:12.4;--w:6">A001_C007</i>
+                    <i class="clip clip--laranja clip--figurinha" style="--x:18.8;--w:15">TAKE_FINAL</i>
+                    <i class="clip clip--laranja" style="--x:34.2;--w:9">A002_C001</i>
+                    <i class="clip clip--laranja" style="--x:43.6;--w:5">CORTE</i>
+                    <i class="clip clip--laranja" style="--x:49;--w:16">PLANO_SEQ</i>
+                    <i class="clip clip--laranja" style="--x:65.4;--w:8">A003_C010</i>
+                    <i class="clip clip--laranja" style="--x:73.8;--w:13">REFRÃO</i>
+                    <i class="clip clip--laranja" style="--x:87.2;--w:12.8">A004_C002</i>
+                </div>
+                <div class="timeline__trilha timeline__trilha--audio" data-nome="A1">
+                    <i class="clip clip--audio" style="--x:0;--w:100">MIX_MASTER.wav</i>
+                </div>
+                <div class="timeline__trilha timeline__trilha--audio" data-nome="A2">
+                    <i class="clip clip--audio" style="--x:6;--w:22">AMBIENTE</i>
+                    <i class="clip clip--audio" style="--x:40;--w:9">WHOOSH</i>
+                    <i class="clip clip--audio" style="--x:58;--w:30">VOZ_TAKE2</i>
+                </div>
+                <div class="timeline__agulha"><span></span></div>
+            </div>
+            <div class="visor"></div>
+        </div>
+
         <div class="abas">
             <a class="abas__marca" href="#topo" aria-label="Início">
                 <span class="abas__selo">TS</span>
                 <span>Álbum oficial <b>2026</b></span>
             </a>
+            <div class="rec" aria-hidden="true">
+                <span class="rec__info">4K · 24P</span>
+                <span class="rec__luz">Rec</span>
+                <span class="rec__tc" data-timecode>00:00:00:00</span>
+            </div>
         </div>
 
         <div class="capa__palco" id="topo">
@@ -66,7 +112,7 @@
             <figure class="figurinha figurinha--lenda figurinha--carta brilho" data-tilt style="--r:7deg">
                 <span class="figurinha__selo">Especial</span>
                 <div class="figurinha__foto">
-                    <video autoplay loop muted playsinline preload="metadata" aria-label="Tauan editando">
+                    <video autoplay loop muted playsinline preload="metadata" aria-label="Trecho de vídeo do Dilera editado por Tauan">
                         <source src="videos/Caixinha.mp4" type="video/mp4">
                     </video>
                     <span class="carta__nota">

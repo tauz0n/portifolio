@@ -69,6 +69,24 @@
         });
     }
 
+    /* Visor da capa: timecode correndo a 24 quadros por segundo */
+    const tc = document.querySelector('[data-timecode]');
+    if (tc && !reduz) {
+        const zero = performance.now();
+        const dois = (n) => String(n).padStart(2, '0');
+        let ultimo = -1;
+        const rodar = (agora) => {
+            const q = Math.floor((agora - zero) / (1000 / 24));
+            if (q !== ultimo) {
+                ultimo = q;
+                const s = Math.floor(q / 24);
+                tc.textContent = dois(Math.floor(s / 3600)) + ':' + dois(Math.floor(s / 60) % 60) + ':' + dois(s % 60) + ':' + dois(q % 24);
+            }
+            requestAnimationFrame(rodar);
+        };
+        requestAnimationFrame(rodar);
+    }
+
     /* Menu flutuante: entra com animação ao abrir (CSS) e marca a seção atual */
     const menu = document.querySelector('.menu');
     if (menu) {
@@ -177,6 +195,50 @@
             abre = Math.max(0, Math.min(1, v));
             pacote.style.setProperty('--abre', abre.toFixed(3));
         };
+        /* confete saindo do pacote: papel picado nas cores do álbum, sobe em leque e cai girando */
+        const confete = () => {
+            if (reduz || !Element.prototype.animate) return;
+            const r = slot.getBoundingClientRect();
+            const cx = r.left + scrollX + r.width / 2;
+            const cy = r.top + scrollY + r.height * 0.45;
+            const cores = ['#FF7A1A', '#FFF4E2', '#D9CCFF', '#FFB36B', '#8C64FF'];
+            const caixa = document.createElement('div');
+            caixa.className = 'confete';
+            caixa.setAttribute('aria-hidden', 'true');
+            caixa.style.left = cx + 'px';
+            caixa.style.top = cy + 'px';
+            document.body.appendChild(caixa);
+            const total = innerWidth < 600 ? 46 : 70;
+            const anims = [];
+            for (let i = 0; i < total; i++) {
+                const p = document.createElement('i');
+                const forma = i % 4;
+                const w = forma === 1 ? 8 : 6 + Math.random() * 6;
+                p.style.width = w + 'px';
+                p.style.height = (forma === 1 ? w : forma === 2 ? w * 2.4 : w * 0.6) + 'px';
+                p.style.background = cores[i % cores.length];
+                if (forma === 1) p.style.borderRadius = '50%';
+                if (forma === 3) p.style.clipPath = 'polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+                if (forma === 3) { p.style.width = '14px'; p.style.height = '14px'; }
+                caixa.appendChild(p);
+                /* ângulo em leque para cima, com força variada */
+                const ang = (-90 + (Math.random() - 0.5) * 150) * Math.PI / 180;
+                const forca = 140 + Math.random() * 260;
+                const dx = Math.cos(ang) * forca;
+                const dy = Math.sin(ang) * forca;
+                const cai = 220 + Math.random() * 260;
+                const gira = (Math.random() - 0.5) * 1440;
+                const vira = 360 + Math.random() * 720;
+                const dur = 1300 + Math.random() * 900;
+                anims.push(p.animate([
+                    /* estouro rápido para fora, depois cai devagar como papel */
+                    { transform: 'translate(-50%, -50%) scale(.3)', opacity: 1, easing: 'cubic-bezier(.15,.85,.35,1)' },
+                    { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) rotate(${gira * 0.35}deg) rotateY(${vira * 0.35}deg) scale(1)`, opacity: 1, offset: 0.26, easing: 'cubic-bezier(.4,0,.75,.6)' },
+                    { transform: `translate(calc(-50% + ${dx * 1.35}px), calc(-50% + ${dy + cai}px)) rotate(${gira}deg) rotateY(${vira}deg) scale(.9)`, opacity: 0 }
+                ], { duration: dur, delay: Math.random() * 90, fill: 'both' }).finished);
+            }
+            Promise.all(anims).then(() => caixa.remove(), () => caixa.remove());
+        };
         const abrir = () => {
             if (pacote.classList.contains('is-aberto')) return;
             inicio = null;
@@ -184,6 +246,7 @@
             pacote.classList.remove('is-arrastando');
             pacote.classList.add('is-aberto', 'foi-tocado');
             slot.classList.add('is-revelado');
+            confete();
             cursor(true);
             setTimeout(() => cursor(false), reduz ? 0 : 1500);
             /* o foco não pode sumir junto com o puxador */

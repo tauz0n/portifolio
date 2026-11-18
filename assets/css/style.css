@@ -326,8 +326,256 @@ h2 {
     overflow: hidden;
 }
 
+/* fundo da capa: luz atrás da carta 00, sombra embaixo e uma timeline deitada */
+.capa__fundo {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse 38% 46% at 72% 36%, rgba(140, 100, 255, .75), rgba(110, 64, 240, .25) 55%, transparent 75%),
+        radial-gradient(circle at 86% 12%, rgba(255, 122, 26, .22), transparent 30%),
+        radial-gradient(ellipse 60% 50% at 10% 0%, rgba(26, 11, 75, .35), transparent 70%),
+        linear-gradient(to bottom, transparent 45%, rgba(26, 11, 75, .55) 100%);
+}
+
+.timeline {
+    --trilha: clamp(30px, min(4.4vw, 6.5svh), 58px);
+    position: absolute;
+    /* bem mais larga que a tela: as pontas da trilha nunca aparecem */
+    left: -40%;
+    right: -40%;
+    bottom: -1%;
+    padding-left: 56px;
+    transform-origin: 50% 100%;
+    transform: perspective(1000px) rotateX(32deg);
+    opacity: .62;
+    /* some suave para cima e fica mais fraca embaixo do texto (o centro do plano é a tela) */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%), linear-gradient(to right, rgba(0, 0, 0, .3) 32%, #000 52%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to bottom, transparent, #000 40%), linear-gradient(to right, rgba(0, 0, 0, .3) 32%, #000 52%);
+    mask-composite: intersect;
+}
+
+/* visor de câmera: cantoneiras em volta da capa */
+.visor {
+    position: absolute;
+    inset: 84px var(--gutter) 28px;
+    z-index: 1;
+    pointer-events: none;
+    --c: rgba(255, 244, 226, .55);
+    background:
+        linear-gradient(var(--c), var(--c)) 0 0 / 34px 2px,
+        linear-gradient(var(--c), var(--c)) 0 0 / 2px 34px,
+        linear-gradient(var(--c), var(--c)) 100% 0 / 34px 2px,
+        linear-gradient(var(--c), var(--c)) 100% 0 / 2px 34px,
+        linear-gradient(var(--c), var(--c)) 0 100% / 34px 2px,
+        linear-gradient(var(--c), var(--c)) 0 100% / 2px 34px,
+        linear-gradient(var(--c), var(--c)) 100% 100% / 34px 2px,
+        linear-gradient(var(--c), var(--c)) 100% 100% / 2px 34px;
+    background-repeat: no-repeat;
+}
+
+/* REC + timecode no canto de cima, à direita do selo */
+.rec {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: .8125rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+    color: var(--papel);
+}
+
+.rec__luz {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rec__luz::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--laranja);
+    box-shadow: 0 0 10px rgba(255, 122, 26, .9);
+    animation: rec-pisca 1.2s steps(1) infinite;
+}
+
+.rec__info {
+    color: var(--lilas);
+}
+
+.rec,
+.abas__marca {
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .rec { gap: 12px; font-size: .75rem; }
+    .rec__info { display: none; }
+    .visor { inset: 74px 12px 16px; }
+}
+
+@media (max-width: 420px) {
+    .rec__luz { font-size: 0; }
+}
+
+/* confete do pacote (as peças são criadas no main.js) */
+.confete {
+    position: absolute;
+    z-index: 60;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    perspective: 600px;
+}
+
+.confete i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 2px;
+    will-change: transform, opacity;
+}
+
+@keyframes rec-pisca {
+    50% { opacity: .15; }
+}
+
+.timeline__regua {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 26px;
+    margin-bottom: 6px;
+    padding: 0 4px;
+    font-size: 11px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .04em;
+    color: var(--lilas);
+    background:
+        repeating-linear-gradient(90deg, rgba(217, 204, 255, .55) 0 1px, transparent 1px 12px) bottom / 100% 6px no-repeat,
+        repeating-linear-gradient(90deg, rgba(217, 204, 255, .8) 0 1px, transparent 1px 60px) bottom / 100% 12px no-repeat;
+}
+
+.timeline__trilha {
+    position: relative;
+    height: var(--trilha);
+    margin-bottom: 5px;
+    border-radius: 4px;
+    background: rgba(26, 11, 75, .45);
+}
+
+/* nome da trilha (V1, A1...) na coluna da esquerda */
+.timeline__trilha::before {
+    content: attr(data-nome);
+    position: absolute;
+    right: 100%;
+    top: 0;
+    bottom: 0;
+    width: 48px;
+    margin-right: 8px;
+    display: grid;
+    place-items: center;
+    border-radius: 4px;
+    background: var(--tinta);
+    color: var(--lilas);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.timeline__trilha--audio {
+    margin-top: 10px;
+}
+
+.timeline__trilha--audio + .timeline__trilha--audio {
+    margin-top: 0;
+}
+
+.clip {
+    position: absolute;
+    top: 3px;
+    bottom: 3px;
+    left: calc(var(--x) * 1%);
+    width: calc(var(--w) * 1% - 3px);
+    padding: 4px 8px;
+    overflow: hidden;
+    border-radius: 5px;
+    font-style: normal;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--tinta);
+    box-shadow: inset 0 -3px 0 rgba(26, 11, 75, .22);
+}
+
+.clip--laranja { background: var(--laranja); }
+.clip--lilas { background: var(--lilas); }
+.clip--papel { background: var(--papel); }
+
+/* clipes com borda de figurinha: o elo com o álbum */
+.clip--figurinha {
+    outline: 3px solid var(--papel);
+    outline-offset: -1px;
+    box-shadow: inset 0 -3px 0 rgba(26, 11, 75, .22), 0 0 0 5px rgba(26, 11, 75, .35);
+}
+
+/* áudio: onda desenhada com SVG embutido */
+.clip--audio {
+    color: var(--lilas);
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='40' viewBox='0 0 96 40'%3E%3Cg fill='%23D9CCFF' fill-opacity='.7'%3E%3Crect x='1' y='16' width='2' height='8'/%3E%3Crect x='5' y='10' width='2' height='20'/%3E%3Crect x='9' y='6' width='2' height='28'/%3E%3Crect x='13' y='13' width='2' height='14'/%3E%3Crect x='17' y='4' width='2' height='32'/%3E%3Crect x='21' y='11' width='2' height='18'/%3E%3Crect x='25' y='15' width='2' height='10'/%3E%3Crect x='29' y='8' width='2' height='24'/%3E%3Crect x='33' y='2' width='2' height='36'/%3E%3Crect x='37' y='9' width='2' height='22'/%3E%3Crect x='41' y='14' width='2' height='12'/%3E%3Crect x='45' y='7' width='2' height='26'/%3E%3Crect x='49' y='12' width='2' height='16'/%3E%3Crect x='53' y='5' width='2' height='30'/%3E%3Crect x='57' y='16' width='2' height='8'/%3E%3Crect x='61' y='10' width='2' height='20'/%3E%3Crect x='65' y='3' width='2' height='34'/%3E%3Crect x='69' y='12' width='2' height='16'/%3E%3Crect x='73' y='8' width='2' height='24'/%3E%3Crect x='77' y='15' width='2' height='10'/%3E%3Crect x='81' y='6' width='2' height='28'/%3E%3Crect x='85' y='11' width='2' height='18'/%3E%3Crect x='89' y='4' width='2' height='32'/%3E%3Crect x='93' y='13' width='2' height='14'/%3E%3C/g%3E%3C/svg%3E") 0 60% / auto 70% repeat-x,
+        var(--tinta-suave);
+    box-shadow: inset 0 0 0 1px rgba(217, 204, 255, .35);
+}
+
+/* agulha (playhead) varrendo a timeline */
+.timeline__agulha {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 56px;
+    right: 0;
+    animation: agulha 22s linear infinite;
+}
+
+.timeline__agulha span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--laranja);
+    box-shadow: 0 0 12px rgba(255, 122, 26, .9);
+}
+
+.timeline__agulha span::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -7px;
+    width: 16px;
+    height: 18px;
+    background: var(--laranja);
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%);
+}
+
+@keyframes agulha {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
+}
+
 .capa__palco {
     position: relative;
+    z-index: 1;
     flex: 1;
     width: 100%;
     max-width: var(--max);
@@ -1604,7 +1852,8 @@ html.puxando-ziper * {
 
     .menu,
     .menu ul,
-    .menu li {
+    .menu li,
+    .rec__luz::before {
         animation: none;
     }
 
@@ -1613,6 +1862,7 @@ html.puxando-ziper * {
     }
 
     .faixa__trilho,
+    .timeline__agulha,
     .ziper__puxador,
     .pacote.is-arrastando .ziper__dentes,
     .pacote.is-arrastando .ziper::before,
