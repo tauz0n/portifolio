@@ -344,24 +344,25 @@ h2 {
     --trilha: clamp(30px, min(4.4vw, 6.5svh), 58px);
     position: absolute;
     /* bem mais larga que a tela: as pontas da trilha nunca aparecem */
-    left: -40%;
-    right: -40%;
-    bottom: -1%;
+    left: -60%;
+    right: -60%;
+    bottom: -2%;
     padding-left: 56px;
     transform-origin: 50% 100%;
-    transform: perspective(1000px) rotateX(32deg);
+    /* o rotate final deixa as trilhas paralelas à faixa laranja (-1.5deg) */
+    transform: rotate(-1.5deg) perspective(1000px) rotateX(32deg);
     opacity: .62;
     /* some suave para cima e fica mais fraca embaixo do texto (o centro do plano é a tela) */
-    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%), linear-gradient(to right, rgba(0, 0, 0, .3) 32%, #000 52%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%), linear-gradient(to right, rgba(0, 0, 0, .3) 38%, #000 55%);
     -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to bottom, transparent, #000 40%), linear-gradient(to right, rgba(0, 0, 0, .3) 32%, #000 52%);
+    mask-image: linear-gradient(to bottom, transparent, #000 40%), linear-gradient(to right, rgba(0, 0, 0, .3) 38%, #000 55%);
     mask-composite: intersect;
 }
 
 /* visor de câmera: cantoneiras em volta da capa */
 .visor {
     position: absolute;
-    inset: 84px var(--gutter) 28px;
+    inset: 84px var(--gutter) calc(2.8vw + 34px);
     z-index: 1;
     pointer-events: none;
     --c: rgba(255, 244, 226, .55);
@@ -1116,11 +1117,14 @@ a.figurinha:focus-visible .play {
 /* ---------- Faixa (pacotinho) ---------- */
 
 .faixa {
+    /* sobe por cima do fim da capa: a borda reta da capa some atrás da faixa inclinada */
+    position: relative;
+    z-index: 2;
     overflow: hidden;
     background: var(--laranja);
     color: var(--tinta);
     transform: rotate(-1.5deg);
-    margin: 0 -20px;
+    margin: calc(-1.4vw - 12px) -20px 0;
     box-shadow: 0 10px 24px rgba(26, 11, 75, .3);
 }
 
