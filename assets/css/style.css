@@ -1113,20 +1113,312 @@ a.figurinha:focus-visible .play {
     opacity: calc(var(--foil) * .65);
 }
 
-.slot__numero {
-    font-size: 6rem;
-    font-weight: 900;
-    font-style: italic;
-    font-stretch: 68%;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-}
-
 .slot__legenda {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
     font-size: .875rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .12em;
+    text-align: center;
+}
+
+.slot__legenda strong {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
+    font-style: italic;
+    font-stretch: 70%;
+    line-height: .9;
+    letter-spacing: 0;
+    color: var(--papel);
+}
+
+/* ---------- pacote fechado com zíper (carta final) ---------- */
+@property --abre {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+
+.slot--vazio.tem-pacote .slot__legenda {
+    opacity: 0;
+    transform: scale(.6) rotate(-8deg);
+    transition: opacity .35s ease-out .4s, transform .8s cubic-bezier(.34, 1.56, .64, 1) .4s;
+}
+
+/* a carta salta para fora do pacote e dá um reflexo holográfico */
+.slot--vazio.is-revelado {
+    animation: carta-sai 1s var(--ease) .3s;
+}
+
+.slot--vazio.is-revelado.brilho::after {
+    animation: carta-reflexo 1.2s ease-out .35s;
+}
+
+@keyframes carta-sai {
+    0% { transform: rotate(-2deg); }
+    30% { transform: translateY(-9%) rotate(5deg) scale(1.08); }
+    58% { transform: translateY(1%) rotate(-5deg) scale(.98); }
+    80% { transform: rotate(-1deg) scale(1.01); }
+    100% { transform: rotate(-2deg); }
+}
+
+@keyframes carta-reflexo {
+    0% { opacity: 0; --mx: 0%; --my: 20%; }
+    30% { opacity: .85; }
+    100% { opacity: 0; --mx: 100%; --my: 80%; }
+}
+
+/* enquanto puxa o zíper, o cursor some */
+html.puxando-ziper,
+html.puxando-ziper * {
+    cursor: none !important;
+}
+
+.slot--vazio.is-revelado .slot__legenda {
+    opacity: 1;
+    transform: none;
+}
+
+.pacote {
+    --abre: 0;
+    --linha: 22%;
+    --z: 7px;
+    position: absolute;
+    inset: -3px;
+    z-index: 1;
+    filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .35));
+    transform-origin: 50% 100%;
+    transform: rotate(calc(var(--vel, 0) * 3deg)) translateX(calc(var(--vel, 0) * 4px));
+    transition: --abre .45s var(--ease);
+}
+
+.pacote[hidden] {
+    display: none;
+}
+
+.pacote.is-arrastando {
+    transition: none;
+}
+
+.pacote__topo,
+.pacote__corpo {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+/* aba acima do zíper: serrilhada em cima, levanta pela esquerda conforme abre */
+.pacote__topo {
+    top: 0;
+    height: var(--linha);
+    background:
+        linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .35) 45%, transparent 60%),
+        var(--laranja-escuro);
+    -webkit-mask:
+        conic-gradient(from 135deg at 50% 0, #000 90deg, #0000 0) top / calc(2 * var(--z)) var(--z) repeat-x,
+        linear-gradient(#000 0 0) 0 var(--z) / 100% 100% no-repeat;
+    mask:
+        conic-gradient(from 135deg at 50% 0, #000 90deg, #0000 0) top / calc(2 * var(--z)) var(--z) repeat-x,
+        linear-gradient(#000 0 0) 0 var(--z) / 100% 100% no-repeat;
+    transform-origin: 100% 100%;
+    transform: translateY(calc(var(--abre) * -6px)) rotate(calc(var(--abre) * -5deg + var(--vel, 0) * -4deg));
+}
+
+.pacote__corpo {
+    top: var(--linha);
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px 16px calc(var(--z) + 34px);
+    text-align: center;
+    color: var(--tinta);
+    background:
+        linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, .4) 38%, transparent 52%),
+        repeating-linear-gradient(-35deg, transparent 0 22px, rgba(91, 43, 224, .14) 22px 44px),
+        var(--laranja);
+    -webkit-mask:
+        conic-gradient(from -45deg at 50% 100%, #000 90deg, #0000 0) bottom / calc(2 * var(--z)) var(--z) repeat-x,
+        linear-gradient(#000 0 0) 0 0 / 100% calc(100% - var(--z)) no-repeat;
+    mask:
+        conic-gradient(from -45deg at 50% 100%, #000 90deg, #0000 0) bottom / calc(2 * var(--z)) var(--z) repeat-x,
+        linear-gradient(#000 0 0) 0 0 / 100% calc(100% - var(--z)) no-repeat;
+}
+
+.pacote__marca {
+    font-size: .75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+}
+
+.pacote__titulo {
+    font-size: clamp(2.25rem, 4.6vw, 3.25rem);
+    font-weight: 900;
+    font-style: italic;
+    font-stretch: 68%;
+    line-height: .85;
+    text-transform: uppercase;
+    color: var(--violeta);
+}
+
+.pacote__conteudo {
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--tinta);
+    color: var(--papel);
+    font-size: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.pacote__dica {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(var(--z) + 14px);
+    font-size: .6875rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    text-align: center;
+    color: var(--tinta);
+    opacity: calc(.75 - var(--abre));
+}
+
+.pacote__dica::after {
+    content: " →";
+}
+
+/* zíper: dentes fechados à direita do puxador, abertos (com a fenda) à esquerda */
+.ziper {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    top: var(--linha);
+    height: 14px;
+    transform: translateY(-50%);
+}
+
+.ziper__dentes,
+.ziper::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+.ziper__dentes {
+    left: 0;
+    right: 0;
+    background:
+        repeating-linear-gradient(90deg, var(--papel) 0 4px, transparent 4px 8px) top / 100% 60% no-repeat,
+        repeating-linear-gradient(90deg, transparent 0 4px, var(--papel-sombra) 4px 8px) bottom / 100% 60% no-repeat,
+        linear-gradient(var(--tinta), var(--tinta)) center / 100% 4px no-repeat;
+    clip-path: inset(0 0 0 calc(var(--abre) * 100%));
+}
+
+.ziper::before {
+    content: "";
+    left: 0;
+    width: calc(var(--abre) * 100%);
+    background:
+        repeating-linear-gradient(90deg, var(--papel) 0 4px, transparent 4px 8px) 0 -2px / 100% 5px no-repeat,
+        repeating-linear-gradient(90deg, transparent 0 4px, var(--papel-sombra) 4px 8px) 0 calc(100% + 2px) / 100% 5px no-repeat,
+        linear-gradient(var(--tinta), var(--tinta)) center / 100% 8px no-repeat;
+}
+
+.ziper__puxador {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--abre) * (100% - 30px));
+    width: 30px;
+    height: 46px;
+    margin-top: -12px;
+    padding: 0;
+    border: 2px solid var(--tinta);
+    border-radius: 8px 8px 14px 14px;
+    background: linear-gradient(160deg, #fff 0%, var(--papel) 45%, var(--papel-sombra) 100%);
+    box-shadow: 0 4px 0 var(--tinta), 0 8px 14px rgba(0, 0, 0, .3);
+    cursor: grab;
+    touch-action: none;
+    transform-origin: 50% 0;
+    rotate: calc(var(--vel, 0) * -28deg);
+    transition: scale .25s var(--ease);
+    animation: cutuca 3.2s var(--ease) 1.5s infinite;
+}
+
+/* segurando: o puxador cresce e os dentes tremem */
+.pacote.is-arrastando .ziper__puxador {
+    scale: 1.14;
+}
+
+.pacote.is-arrastando .ziper__dentes,
+.pacote.is-arrastando .ziper::before {
+    animation: ziper-treme .1s steps(2) infinite;
+}
+
+@keyframes ziper-treme {
+    from { translate: 0 -.6px; }
+    to { translate: 0 .6px; }
+}
+
+/* o furo do puxador */
+.ziper__puxador span {
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    width: 10px;
+    height: 16px;
+    margin-left: -5px;
+    border-radius: 5px;
+    background: var(--tinta);
+}
+
+.pacote.is-arrastando .ziper__puxador {
+    cursor: grabbing;
+}
+
+.ziper__puxador:focus-visible {
+    outline: 3px solid var(--lilas);
+    outline-offset: 3px;
+}
+
+.pacote.foi-tocado .ziper__puxador {
+    animation: none;
+}
+
+@keyframes cutuca {
+    0%, 70%, 100% { transform: none; }
+    78% { transform: translateX(10px) rotate(-6deg); }
+    86% { transform: none; }
+    92% { transform: translateX(5px); }
+}
+
+/* aberto: a aba voa para cima, o corpo desce e a carta aparece */
+.pacote.is-aberto .pacote__topo {
+    transition: transform .7s var(--ease), opacity .45s ease-out .15s;
+    transform: translate(-12%, -160%) rotate(-16deg);
+    opacity: 0;
+}
+
+.pacote.is-aberto .ziper {
+    transition: transform .7s var(--ease), opacity .35s ease-out .1s;
+    transform: translate(-12%, -500%) rotate(-16deg);
+    opacity: 0;
+}
+
+.pacote.is-aberto .pacote__corpo,
+.pacote.is-aberto .pacote__dica {
+    transition: transform .8s cubic-bezier(.5, 0, .75, 0) .12s, opacity .5s ease-in .3s;
+    transform: translateY(115%) rotate(5deg);
+    opacity: 0;
 }
 
 .fim__texto h2 {
@@ -1276,12 +1568,8 @@ a.figurinha:focus-visible .play {
     }
 
     .slot--vazio {
-        max-width: 220px;
-        aspect-ratio: 4 / 4.6;
-    }
-
-    .slot__numero {
-        font-size: 4.5rem;
+        max-width: 240px;
+        aspect-ratio: 4 / 5;
     }
 }
 
@@ -1324,7 +1612,12 @@ a.figurinha:focus-visible .play {
         scroll-behavior: auto;
     }
 
-    .faixa__trilho {
+    .faixa__trilho,
+    .ziper__puxador,
+    .pacote.is-arrastando .ziper__dentes,
+    .pacote.is-arrastando .ziper::before,
+    .slot--vazio.is-revelado,
+    .slot--vazio.is-revelado.brilho::after {
         animation: none;
     }
 

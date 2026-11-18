@@ -337,9 +337,25 @@
         <!-- ===================== CONTATO ===================== -->
         <section class="pagina pagina--fim" id="contato" aria-labelledby="t-contato">
             <div class="fim" data-tilt="5" data-tilt-brilho=".slot--vazio">
-                <div class="slot slot--vazio brilho" aria-hidden="true">
-                    <span class="slot__numero">07</span>
-                    <span class="slot__legenda">Sua marca aqui</span>
+                <div class="slot slot--vazio brilho">
+                    <p class="slot__legenda"><strong>Sua marca</strong> aqui</p>
+
+                    <!-- Pacote fechado: arraste o puxador do zíper para a direita para abrir (main.js) -->
+                    <div class="pacote" hidden>
+                        <div class="pacote__topo" aria-hidden="true"></div>
+                        <div class="pacote__corpo" aria-hidden="true">
+                            <span class="pacote__marca">Tauan Sena</span>
+                            <span class="pacote__titulo">Edição<br>especial</span>
+                            <span class="pacote__conteudo">1 carta inédita</span>
+                        </div>
+                        <div class="ziper">
+                            <span class="ziper__dentes" aria-hidden="true"></span>
+                            <button class="ziper__puxador" type="button" aria-label="Abrir o pacote">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <span class="pacote__dica" aria-hidden="true">Arraste para abrir</span>
+                    </div>
                 </div>
 
                 <div class="fim__texto">

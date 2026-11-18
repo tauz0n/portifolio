@@ -141,6 +141,109 @@
         });
     });
 
+    /* Carta final: pacote fechado, abre puxando o zíper para a direita */
+    const pacote = document.querySelector('.pacote');
+    if (pacote) {
+        const slot = pacote.closest('.slot--vazio');
+        const ziper = pacote.querySelector('.ziper');
+        const puxador = pacote.querySelector('.ziper__puxador');
+        let inicio = null;
+        let base = 0;
+        let abre = 0;
+        let moveu = false;
+        let ultimoX = 0;
+        let vel = 0;
+        let mola = 0;
+
+        pacote.hidden = false;
+
+        /* tremida: o pacote e o puxador balançam conforme a velocidade do puxão e voltam como mola */
+        const balancar = () => {
+            vel *= 0.82;
+            pacote.style.setProperty('--vel', vel.toFixed(3));
+            mola = Math.abs(vel) > 0.005 ? requestAnimationFrame(balancar) : 0;
+            if (!mola) pacote.style.setProperty('--vel', '0');
+        };
+        const empurrar = (dx) => {
+            if (reduz) return;
+            vel = Math.max(-1, Math.min(1, vel + dx / 14));
+            if (!mola) mola = requestAnimationFrame(balancar);
+        };
+        /* durante o puxão o cursor some: o puxador vira a mão */
+        const cursor = (sumir) => document.documentElement.classList.toggle('puxando-ziper', sumir);
+        slot.classList.add('tem-pacote');
+
+        const marcar = (v) => {
+            abre = Math.max(0, Math.min(1, v));
+            pacote.style.setProperty('--abre', abre.toFixed(3));
+        };
+        const abrir = () => {
+            if (pacote.classList.contains('is-aberto')) return;
+            inicio = null;
+            marcar(1);
+            pacote.classList.remove('is-arrastando');
+            pacote.classList.add('is-aberto', 'foi-tocado');
+            slot.classList.add('is-revelado');
+            cursor(true);
+            setTimeout(() => cursor(false), reduz ? 0 : 1500);
+            /* o foco não pode sumir junto com o puxador */
+            if (document.activeElement === puxador) {
+                const legenda = slot.querySelector('.slot__legenda');
+                legenda.tabIndex = -1;
+                legenda.focus({ preventScroll: true });
+            }
+            setTimeout(() => { pacote.hidden = true; }, reduz ? 50 : 1100);
+        };
+
+        puxador.addEventListener('pointerdown', (ev) => {
+            if (ev.button !== 0) return;
+            ev.preventDefault();
+            try { puxador.setPointerCapture(ev.pointerId); } catch (e) { /* segue pelo window */ }
+            inicio = ev.clientX;
+            base = abre;
+            moveu = false;
+            ultimoX = ev.clientX;
+            pacote.classList.add('is-arrastando', 'foi-tocado');
+            cursor(true);
+        });
+        addEventListener('pointermove', (ev) => {
+            if (inicio === null) return;
+            const curso = ziper.clientWidth - puxador.offsetWidth;
+            if (Math.abs(ev.clientX - inicio) > 3) moveu = true;
+            empurrar(ev.clientX - ultimoX);
+            ultimoX = ev.clientX;
+            marcar(base + (ev.clientX - inicio) / curso);
+            if (abre >= 0.98) abrir();
+        });
+        const soltar = () => {
+            if (inicio === null) return;
+            inicio = null;
+            pacote.classList.remove('is-arrastando');
+            if (abre > 0.75) { abrir(); return; }
+            cursor(false);
+            empurrar(-abre * 20);
+            marcar(0);
+        };
+        /* no window: o arraste continua mesmo se o dedo/mouse sair do puxador */
+        addEventListener('pointerup', soltar);
+        addEventListener('pointercancel', soltar);
+
+        puxador.addEventListener('click', (ev) => {
+            /* teclado (Enter/Espaço) abre direto; clique sem arrastar só dá uma puxadinha de dica */
+            if (ev.detail === 0) { abrir(); return; }
+            if (moveu || pacote.classList.contains('is-aberto')) return;
+            marcar(0.18);
+            setTimeout(() => { if (inicio === null && !pacote.classList.contains('is-aberto')) marcar(0); }, 260);
+        });
+        puxador.addEventListener('keydown', (ev) => {
+            if (ev.key !== 'ArrowRight') return;
+            ev.preventDefault();
+            pacote.classList.add('foi-tocado');
+            marcar(abre + 0.25);
+            if (abre >= 1) abrir();
+        });
+    }
+
     /* Shorts: toque para tocar com som, pausa os outros */
     const shorts = document.querySelectorAll('video.short');
     shorts.forEach((video) => {
