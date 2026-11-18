@@ -18,5 +18,5 @@ Criador, com energia e bom humor, falando em português informal (pt-BR). Frases
 ## Fatos (não inventar)
 - Clientes/times: Dilera, Red Bull, CBF, Aionn. (AmadoCine é o festival do curta Tereza, não é cliente.)
 - Trabalhos em destaque: Aionn — Pirata (videoclipe), Tereza (curta, AmadoCine 2026.1), "Enganei todos eles!" (Dilera, gameplay).
-- Verticais: Unidom, CBF, Tokyo.
+- Verticais: Red Bull, CBF, Tokyo.
 - Contato: Instagram @tauansenaa, tauansena@gmail.com, Behance be.net/tauansenaa.

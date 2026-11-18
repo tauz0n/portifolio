@@ -63,17 +63,11 @@
         });
     }
 
-    /* Menu flutuante: aparece depois da capa e marca a seção atual */
+    /* Menu flutuante: entra com animação ao abrir (CSS) e marca a seção atual */
     const menu = document.querySelector('.menu');
-    if (menu && 'IntersectionObserver' in window) {
+    if (menu) {
         const links = new Map();
         menu.querySelectorAll('a').forEach((a) => links.set(a.getAttribute('href').slice(1), a));
-
-        const capa = document.querySelector('.capa');
-        menu.classList.add('is-escondido');
-        new IntersectionObserver(([e]) => {
-            menu.classList.toggle('is-escondido', e.isIntersecting);
-        }, { rootMargin: '0px 0px -40% 0px' }).observe(capa);
 
         const marcar = (id) => {
             links.forEach((a, chave) => {

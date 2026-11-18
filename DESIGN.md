@@ -27,7 +27,7 @@ Archivo variável (Google Fonts, eixos wdth 62–125 + itálico).
 - `.faixa`: marquee laranja inclinado com nomes de clientes.
 - `.slot`: figurinha + `dl.ficha` (canal, formato).
 - `.fim`: painel tinta com o slot tracejado vazio e o CTA.
-- `.menu`: pílula tinta fixa embaixo, no centro. Aparece depois da capa. O item da seção atual vira pílula de papel e abre o nome (grid 0fr→1fr com desfoque); os outros ficam só com o ícone.
+- `.menu`: pílula tinta fixa embaixo, no centro. Entra ao abrir o site: sobe com mola, a pílula abre do centro e os ícones pulam em sequência (desligado com movimento reduzido). O item da seção atual vira pílula de papel e abre o nome (grid 0fr→1fr com desfoque); os outros ficam só com o ícone.
 - Trabalhos: clicar na figurinha troca a capa por um player do YouTube (youtube-nocookie) ali dentro, endireita a figurinha e desliga o tilt. Só um vídeo toca por vez. Ctrl+clique abre no YouTube.
 - `.botao`: pílula laranja com sombra sólida. Os botões `[data-whatsapp]` recebem o link via JS.
 

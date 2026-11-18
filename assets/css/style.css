@@ -177,10 +177,53 @@ h2 {
     transition: transform .5s var(--ease), opacity .3s ease-out;
 }
 
-.menu.is-escondido {
-    transform: translate(-50%, calc(100% + 32px));
-    opacity: 0;
-    pointer-events: none;
+/* entrada do menu ao abrir o site: sobe, abre a pílula e os ícones pulam em sequência */
+.menu {
+    animation: menu-sobe .8s cubic-bezier(.34, 1.4, .64, 1) .45s both;
+}
+
+.menu ul {
+    animation: menu-abre .7s var(--ease) .7s both;
+}
+
+.menu li {
+    animation: menu-icone .55s cubic-bezier(.34, 1.56, .64, 1) both;
+    animation-delay: calc(.85s + var(--i, 0) * .07s);
+}
+
+.menu li:nth-child(2) { --i: 1; }
+.menu li:nth-child(3) { --i: 2; }
+.menu li:nth-child(4) { --i: 3; }
+
+@keyframes menu-sobe {
+    from {
+        transform: translate(-50%, calc(100% + 40px));
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes menu-abre {
+    from {
+        clip-path: inset(0 calc(50% - 27px) round 99px);
+    }
+    to {
+        clip-path: inset(-60px round 99px);
+    }
+}
+
+@keyframes menu-icone {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(.4);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 .menu ul {
@@ -654,7 +697,7 @@ a.figurinha:focus-visible .play {
 .faixa__trilho {
     display: flex;
     width: max-content;
-    animation: rolar 28s linear infinite;
+    animation: rolar 168s linear infinite;
 }
 
 .faixa span {
@@ -973,6 +1016,7 @@ a.figurinha:focus-visible .play {
         grid-template-rows: auto;
         gap: 20px;
         padding-top: 32px;
+        padding-bottom: 96px; /* espaço pro menu flutuante */
     }
 
     .capa__nome-a,
@@ -1067,6 +1111,12 @@ a.figurinha:focus-visible .play {
     .menu__rotulo,
     .menu__rotulo > span {
         transition: none;
+    }
+
+    .menu,
+    .menu ul,
+    .menu li {
+        animation: none;
     }
 
     html {
