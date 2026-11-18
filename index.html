@@ -426,9 +426,24 @@
     <footer class="rodape">
         <span>&copy; 2026 Tauan Sena</span>
         <span>Distribuição gratuita. Proibida a venda avulsa.</span>
+        <span class="rodape__credito">Modelo 3D do pacote: <a
+                href="https://sketchfab.com/3d-models/trading-card-pack-26d1a87e47814d0ea3a710d169e3a671"
+                target="_blank" rel="noopener">"Trading Card Pack"</a> por <a href="https://sketchfab.com/goonmize1"
+                target="_blank" rel="noopener">goonmize1</a>, <a href="https://creativecommons.org/licenses/by/4.0/"
+                target="_blank" rel="noopener">CC BY 4.0</a></span>
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <!-- Pacote 3D: Three.js só é baixado quando o Contato chega perto da tela -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="assets/js/pacote3d.js"></script>
 </body>
 
 </html>
