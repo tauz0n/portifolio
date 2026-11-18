@@ -717,6 +717,15 @@ a.figurinha--carta:hover {
     border-left: 1px solid rgba(255, 122, 26, .5);
 }
 
+/* carta 00: só quatro atributos, em duas linhas */
+.figurinha--lenda .carta__stats {
+    grid-template-rows: repeat(2, auto);
+}
+
+.figurinha--lenda .carta__stats div:nth-child(n+3) {
+    border-left: 1px solid rgba(255, 122, 26, .5);
+}
+
 .carta__stats dd {
     margin: 0;
     min-width: 2ch;
