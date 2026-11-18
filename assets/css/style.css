@@ -443,24 +443,6 @@ h2 {
     font-size: 1.125rem;
 }
 
-.link-seta {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--laranja);
-}
-
-.link-seta i {
-    transition: transform .3s var(--ease);
-}
-
-.link-seta:hover i {
-    transform: translateY(3px);
-}
-
 /* ---------- Figurinha ---------- */
 
 .figurinha {
@@ -697,7 +679,7 @@ a.figurinha:focus-visible .play {
 .faixa__trilho {
     display: flex;
     width: max-content;
-    animation: rolar 168s linear infinite;
+    animation: rolar 219s linear infinite;
 }
 
 .faixa span {

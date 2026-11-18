@@ -24,7 +24,7 @@ Archivo variável (Google Fonts, eixos wdth 62–125 + itálico).
 - `.figurinha`: borda de papel, `.figurinha__faixa` laranja com título, `.figurinha__num` (círculo tinta), `.figurinha__selo` opcional. A rotação vem de `--r`.
 - `.brilho`: foil holográfico (color-dodge) que se intensifica com `--foil`.
 - `.escudo`: brasão dos times.
-- `.faixa`: marquee laranja inclinado com nomes de clientes.
+- `.faixa`: marquee laranja inclinado com os estilos de vídeo editados (videoclipes, curta-metragem, gameplay, vlogs, shorts, TikTok).
 - `.slot`: figurinha + `dl.ficha` (canal, formato).
 - `.fim`: painel tinta com o slot tracejado vazio e o CTA. O painel inteiro inclina com o mouse (`data-tilt="5"`); o holográfico aparece só na carta 07 (`data-tilt-brilho=".slot--vazio"`).
 - `.menu`: pílula tinta fixa embaixo, no centro. Entra ao abrir o site: sobe com mola, a pílula abre do centro e os ícones pulam em sequência (desligado com movimento reduzido). O item da seção atual vira pílula de papel e abre o nome (grid 0fr→1fr com desfoque); os outros ficam só com o ícone.
