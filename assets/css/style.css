@@ -76,6 +76,17 @@ video {
     max-width: 100%;
 }
 
+/* ícones SVG embutidos (substituem a fonte de ícones) */
+.ico {
+    display: inline-block;
+    flex-shrink: 0;
+    width: auto;
+    height: 1em;
+    vertical-align: -.125em;
+    fill: currentColor;
+    overflow: visible;
+}
+
 a {
     color: inherit;
     text-underline-offset: .2em;
@@ -261,10 +272,9 @@ h2 {
         box-shadow .35s var(--ease);
 }
 
-.menu a i {
+.menu a .ico {
     width: 18px;
-    font-size: 1.05rem;
-    text-align: center;
+    height: 1.05rem;
     transition: transform .45s var(--ease);
 }
 
@@ -291,7 +301,7 @@ h2 {
     background: var(--tinta-suave);
 }
 
-.menu a:active i {
+.menu a:active .ico {
     transform: scale(.86);
 }
 
@@ -301,7 +311,7 @@ h2 {
     box-shadow: 0 2px 0 var(--papel-sombra), 0 4px 10px rgba(0, 0, 0, .25);
 }
 
-.menu a.is-ativo i {
+.menu a.is-ativo .ico {
     color: var(--laranja-escuro);
 }
 
@@ -423,7 +433,7 @@ h2 {
     transition: transform .3s var(--ease), box-shadow .3s var(--ease), background-color .3s var(--ease);
 }
 
-.botao i {
+.botao .ico {
     font-size: 1.3em;
 }
 
@@ -453,11 +463,11 @@ h2 {
     text-decoration-color: var(--laranja);
 }
 
-.link-seta i {
+.link-seta .ico {
     transition: transform .3s var(--ease);
 }
 
-.link-seta:hover i {
+.link-seta:hover .ico {
     transform: translateY(3px);
 }
 
@@ -497,6 +507,10 @@ a.figurinha:hover,
     border-radius: 6px 6px 0 0;
     aspect-ratio: 16 / 9;
     background: var(--tinta);
+}
+
+.figurinha__foto picture {
+    display: contents;
 }
 
 .figurinha__foto img,
@@ -982,7 +996,7 @@ a.figurinha:focus-visible .play {
     color: var(--laranja);
 }
 
-.redes i {
+.redes .ico {
     font-size: 1.15em;
     color: var(--laranja);
 }
@@ -1029,6 +1043,17 @@ a.figurinha:focus-visible .play {
 /* ---------- Responsivo ---------- */
 
 @media (max-width: 900px) {
+    /* no celular a sombra não anima ao colar (só transform e opacity, que rodam na GPU) */
+    .js .colar.colada {
+        transition:
+            opacity .35s ease-out var(--delay, 0s),
+            transform .9s var(--ease) var(--delay, 0s);
+    }
+
+    .js .colar.colada.solta {
+        transition: transform .5s var(--ease);
+    }
+
     .capa__palco {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
