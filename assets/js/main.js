@@ -116,7 +116,7 @@
     document.querySelectorAll('#trabalhos a.figurinha').forEach((card) => {
         const id = idYoutube(card.href);
         if (!id) return;
-        card.setAttribute('aria-label', 'Assistir aqui: ' + card.querySelector('.figurinha__faixa strong').textContent);
+        card.setAttribute('aria-label', 'Assistir aqui: ' + card.querySelector('.carta__nome strong, .figurinha__faixa strong').textContent);
         card.addEventListener('click', (ev) => {
             /* Ctrl/Cmd+clique continua abrindo no YouTube */
             if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button !== 0) return;
@@ -128,7 +128,7 @@
 
             const iframe = document.createElement('iframe');
             iframe.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1';
-            iframe.title = card.querySelector('.figurinha__faixa strong').textContent;
+            iframe.title = card.querySelector('.carta__nome strong, .figurinha__faixa strong').textContent;
             iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
             iframe.allowFullscreen = true;
             card.querySelector('.figurinha__foto').appendChild(iframe);

@@ -41,7 +41,7 @@
     <nav class="menu" aria-label="Páginas do álbum">
         <ul>
             <li><a href="#trabalhos" title="Trabalhos"><i class="fa-solid fa-film" aria-hidden="true"></i><span class="menu__rotulo"><span>Trabalhos</span></span></a></li>
-            <li><a href="#times" title="Times"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span class="menu__rotulo"><span>Times</span></span></a></li>
+            <li><a href="#times" title="Clientes"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span class="menu__rotulo"><span>Clientes</span></span></a></li>
             <li><a href="#verticais" title="Verticais"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span class="menu__rotulo"><span>Verticais</span></span></a></li>
             <li><a href="#contato" title="Contato"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i><span class="menu__rotulo"><span>Contato</span></span></a></li>
         </ul>
@@ -63,18 +63,29 @@
             </h1>
 
             <!-- Figurinha especial #00 (vídeo em loop) -->
-            <figure class="figurinha figurinha--lenda brilho" data-tilt style="--r:7deg">
-                <span class="figurinha__num" aria-hidden="true">00</span>
+            <figure class="figurinha figurinha--lenda figurinha--carta brilho" data-tilt style="--r:7deg">
                 <span class="figurinha__selo">Especial</span>
                 <div class="figurinha__foto">
                     <video autoplay loop muted playsinline preload="metadata" aria-label="Tauan editando">
                         <source src="videos/Caixinha.mp4" type="video/mp4">
                     </video>
+                    <span class="carta__nota">
+                        <strong><span class="sr">Nota geral</span>97</strong>
+                        <span class="carta__pos">Editor</span>
+                    </span>
                 </div>
-                <figcaption class="figurinha__faixa">
+                <div class="carta__nome">
                     <strong>Tauan Sena</strong>
                     <span>Editor de vídeo</span>
-                </figcaption>
+                </div>
+                <dl class="carta__stats">
+                    <div><dt>Ritmo</dt><dd>99</dd></div>
+                    <div><dt>Premiere</dt><dd>98</dd></div>
+                    <div><dt>Legendas</dt><dd>95</dd></div>
+                    <div><dt>Cor</dt><dd>93</dd></div>
+                    <div><dt>Áudio</dt><dd>92</dd></div>
+                    <div><dt>After<span class="carta__longo"> Effects</span></dt><dd>85</dd></div>
+                </dl>
             </figure>
 
             <div class="capa__texto">
@@ -113,64 +124,88 @@
             <div class="trabalhos">
                 <!-- Para adicionar: copie um <article class="slot ..."> inteiro e troque link, imagem e textos. -->
                 <article class="slot slot--grande">
-                    <a class="figurinha brilho" data-tilt style="--r:-2deg"
+                    <!-- Carta: nota geral, posição (formato), escudo do canal e seis atributos -->
+                    <a class="figurinha figurinha--carta brilho" data-tilt style="--r:-2deg"
                         href="https://www.youtube.com/watch?v=SHmI2ZvVeVc" target="_blank" rel="noopener">
-                        <span class="figurinha__num" aria-hidden="true">01</span>
                         <div class="figurinha__foto">
                             <img src="https://img.youtube.com/vi/SHmI2ZvVeVc/maxresdefault.jpg"
                                 alt="Thumbnail do vídeo Enganei todos eles, Among Us, do canal Dilera" loading="lazy"
                                 width="1280" height="720">
                             <span class="play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+                            <span class="carta__nota">
+                                <strong><span class="sr">Nota geral</span>96</strong>
+                                <span class="carta__pos">Game</span>
+                                <img class="carta__canal" alt="Canal Dilera" width="40" height="40" loading="lazy"
+                                    src="https://yt3.googleusercontent.com/5EhGV7VUEVzMtn07yEkiTOR8AYJQ-d-PZs0nBs_aSdJ-jbB3-yudn5hDj33ldcLwv8wNYIwg=s160-c-k-c0x00ffffff-no-rj">
+                            </span>
                         </div>
-                        <span class="figurinha__faixa">
-                            <strong>Enganei todos eles!</strong>
-                            <span>Among Us com a turma</span>
+                        <span class="carta__nome">
+                            <strong>Dilera</strong>
+                            <span>Enganei todos eles! · Among Us</span>
                         </span>
+                        <dl class="carta__stats">
+                            <div><dt>Premiere</dt><dd>99</dd></div>
+                            <div><dt>Ritmo</dt><dd>97</dd></div>
+                            <div><dt>Legendas</dt><dd>94</dd></div>
+                            <div><dt>Áudio</dt><dd>90</dd></div>
+                            <div><dt>Cor</dt><dd>88</dd></div>
+                            <div><dt>After<span class="carta__longo"> Effects</span></dt><dd>82</dd></div>
+                        </dl>
                     </a>
-                    <dl class="ficha">
-                        <div><dt>Canal</dt><dd>Dilera</dd></div>
-                        <div><dt>Formato</dt><dd>YouTube · gameplay</dd></div>
-                    </dl>
                 </article>
 
                 <article class="slot">
-                    <a class="figurinha" data-tilt style="--r:3deg" href="https://youtu.be/2Ftmy05DuR4"
+                    <a class="figurinha figurinha--carta brilho" data-tilt style="--r:3deg" href="https://youtu.be/2Ftmy05DuR4"
                         target="_blank" rel="noopener">
-                        <span class="figurinha__num" aria-hidden="true">02</span>
                         <div class="figurinha__foto">
                             <img src="https://i3.ytimg.com/vi/2Ftmy05DuR4/hqdefault.jpg"
                                 alt="Cena do curta Tereza" loading="lazy" width="480" height="360">
                             <span class="play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+                            <span class="carta__nota">
+                                <strong><span class="sr">Nota geral</span>94</strong>
+                                <span class="carta__pos">Curta</span>
+                            </span>
                         </div>
-                        <span class="figurinha__faixa">
+                        <span class="carta__nome">
                             <strong>Tereza</strong>
-                            <span>AmadoCine 2026.1</span>
+                            <span>Curta-metragem · AmadoCine 2026.1</span>
                         </span>
+                        <dl class="carta__stats">
+                            <div><dt>Narrativa</dt><dd>97</dd></div>
+                            <div><dt>Premiere</dt><dd>96</dd></div>
+                            <div><dt>Cor</dt><dd>95</dd></div>
+                            <div><dt>Ritmo</dt><dd>92</dd></div>
+                            <div><dt>Áudio</dt><dd>91</dd></div>
+                            <div><dt>After<span class="carta__longo"> Effects</span></dt><dd>78</dd></div>
+                        </dl>
                     </a>
-                    <dl class="ficha">
-                        <div><dt>Canal</dt><dd>Tauan Sena</dd></div>
-                        <div><dt>Formato</dt><dd>Curta-metragem</dd></div>
-                    </dl>
                 </article>
 
                 <article class="slot">
-                    <a class="figurinha" data-tilt style="--r:-3deg"
+                    <a class="figurinha figurinha--carta brilho" data-tilt style="--r:-3deg"
                         href="https://youtube.com/watch?v=9BqaW2dIcC0" target="_blank" rel="noopener">
-                        <span class="figurinha__num" aria-hidden="true">03</span>
                         <div class="figurinha__foto">
                             <img src="https://img.youtube.com/vi/9BqaW2dIcC0/maxresdefault.jpg"
                                 alt="Cena do videoclipe Pirata, de Aionn" loading="lazy" width="1280" height="720">
                             <span class="play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+                            <span class="carta__nota">
+                                <strong><span class="sr">Nota geral</span>95</strong>
+                                <span class="carta__pos">Clipe</span>
+                            </span>
                         </div>
-                        <span class="figurinha__faixa">
+                        <span class="carta__nome">
                             <strong>Aionn — Pirata</strong>
                             <span>Videoclipe oficial</span>
                         </span>
+                        <dl class="carta__stats">
+                            <div><dt>Ritmo</dt><dd>99</dd></div>
+                            <div><dt>Premiere</dt><dd>97</dd></div>
+                            <div><dt>Cor</dt><dd>93</dd></div>
+                            <div><dt>Áudio</dt><dd>90</dd></div>
+                            <div><dt>Motion</dt><dd>88</dd></div>
+                            <div><dt>After<span class="carta__longo"> Effects</span></dt><dd>85</dd></div>
+                        </dl>
                     </a>
-                    <dl class="ficha">
-                        <div><dt>Canal</dt><dd>Aionn</dd></div>
-                        <div><dt>Formato</dt><dd>Videoclipe</dd></div>
-                    </dl>
                 </article>
             </div>
         </section>
@@ -178,7 +213,7 @@
         <!-- ===================== TIMES (CANAIS) ===================== -->
         <section class="pagina pagina--times" id="times" aria-labelledby="t-times">
             <div class="pagina__topo">
-                <h2 id="t-times">Times que já editei</h2>
+                <h2 id="t-times">Para quem eu já trabalhei</h2>
             </div>
 
             <ul class="escudos">
@@ -218,8 +253,7 @@
 
             <div class="shorts">
                 <div class="slot slot--alto">
-                    <figure class="figurinha figurinha--short brilho" data-tilt style="--r:-3deg">
-                        <span class="figurinha__num" aria-hidden="true">04</span>
+                    <figure class="figurinha figurinha--short figurinha--carta brilho" data-tilt style="--r:-3deg">
                         <div class="figurinha__foto">
                             <video class="short" preload="none" playsinline poster="img/unidom.jpeg">
                                 <source src="videos/Unidom.mp4" type="video/mp4">
@@ -227,14 +261,27 @@
                             <button class="short__play" type="button" aria-label="Assistir short Red Bull">
                                 <i class="fa-solid fa-play" aria-hidden="true"></i>
                             </button>
+                            <span class="carta__nota">
+                                <strong><span class="sr">Nota geral</span>93</strong>
+                                <span class="carta__pos">Reels</span>
+                                <img class="carta__canal" alt="Canal Red Bull" width="40" height="40" loading="lazy"
+                                    src="https://yt3.googleusercontent.com/ytc/AIdro_k94J7kkxpmlJe3c2iDFJpHk8SAADPpf49cN7XjomXSzEE=s160-c-k-c0x00ffffff-no-rj">
+                            </span>
                         </div>
-                        <figcaption class="figurinha__faixa"><strong>Red Bull</strong><span>Reels</span></figcaption>
+                        <div class="carta__nome"><strong>Red Bull</strong><span>Reels</span></div>
+                        <dl class="carta__stats">
+                            <div><dt>Ritmo</dt><dd>96</dd></div>
+                            <div><dt>Premiere</dt><dd>95</dd></div>
+                            <div><dt>Legendas</dt><dd>94</dd></div>
+                            <div><dt>Áudio</dt><dd>91</dd></div>
+                            <div><dt>Cor</dt><dd>89</dd></div>
+                            <div><dt>After<span class="carta__longo"> Effects</span></dt><dd>84</dd></div>
+                        </dl>
                     </figure>
                 </div>
 
                 <div class="slot slot--alto">
-                    <figure class="figurinha figurinha--short brilho" data-tilt style="--r:2deg">
-                        <span class="figurinha__num" aria-hidden="true">05</span>
+                    <figure class="figurinha figurinha--short figurinha--carta brilho" data-tilt style="--r:2deg">
                         <div class="figurinha__foto">
                             <video class="short" preload="none" playsinline poster="img/cbf.jpeg">
                                 <source src="videos/CBF.mp4" type="video/mp4">
@@ -242,14 +289,27 @@
                             <button class="short__play" type="button" aria-label="Assistir short CBF">
                                 <i class="fa-solid fa-play" aria-hidden="true"></i>
                             </button>
+                            <span class="carta__nota">
+                                <strong><span class="sr">Nota geral</span>92</strong>
+                                <span class="carta__pos">Vert.</span>
+                                <img class="carta__canal" alt="Canal CBF" width="40" height="40" loading="lazy"
+                                    src="https://yt3.googleusercontent.com/ytc/AIdro_lGr-WYSe5SfEY765ddXowIwIwBxjp4fsFnBbtuefUK7-w=s160-c-k-c0x00ffffff-no-rj">
+                            </span>
                         </div>
-                        <figcaption class="figurinha__faixa"><strong>CBF</strong><span>Vertical</span></figcaption>
+                        <div class="carta__nome"><strong>CBF</strong><span>Vertical</span></div>
+                        <dl class="carta__stats">
+                            <div><dt>Ritmo</dt><dd>95</dd></div>
+                            <div><dt>Premiere</dt><dd>94</dd></div>
+                            <div><dt>Legendas</dt><dd>92</dd></div>
+                            <div><dt>Cor</dt><dd>90</dd></div>
+                            <div><dt>Áudio</dt><dd>89</dd></div>
+                            <div><dt>After<span class="carta__longo"> Effects</span></dt><dd>83</dd></div>
+                        </dl>
                     </figure>
                 </div>
 
                 <div class="slot slot--alto">
-                    <figure class="figurinha figurinha--short brilho" data-tilt style="--r:-1.5deg">
-                        <span class="figurinha__num" aria-hidden="true">06</span>
+                    <figure class="figurinha figurinha--short figurinha--carta brilho" data-tilt style="--r:-1.5deg">
                         <div class="figurinha__foto">
                             <video class="short" preload="none" playsinline poster="img/tokyo.jpeg">
                                 <source src="videos/Tokyo.mp4" type="video/mp4">
@@ -257,8 +317,20 @@
                             <button class="short__play" type="button" aria-label="Assistir short Tokyo">
                                 <i class="fa-solid fa-play" aria-hidden="true"></i>
                             </button>
+                            <span class="carta__nota">
+                                <strong><span class="sr">Nota geral</span>91</strong>
+                                <span class="carta__pos">TikTok</span>
+                            </span>
                         </div>
-                        <figcaption class="figurinha__faixa"><strong>Tokyo</strong><span>TikTok</span></figcaption>
+                        <div class="carta__nome"><strong>Tokyo</strong><span>TikTok</span></div>
+                        <dl class="carta__stats">
+                            <div><dt>Ritmo</dt><dd>97</dd></div>
+                            <div><dt>Premiere</dt><dd>93</dd></div>
+                            <div><dt>Legendas</dt><dd>95</dd></div>
+                            <div><dt>Áudio</dt><dd>88</dd></div>
+                            <div><dt>Cor</dt><dd>86</dd></div>
+                            <div><dt>After<span class="carta__longo"> Effects</span></dt><dd>80</dd></div>
+                        </dl>
                     </figure>
                 </div>
             </div>

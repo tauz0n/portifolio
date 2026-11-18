@@ -545,26 +545,6 @@ a.figurinha:hover .figurinha__foto img {
     letter-spacing: .06em;
 }
 
-.figurinha__num {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    z-index: 3;
-    display: grid;
-    place-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--tinta);
-    color: var(--papel);
-    border: 3px solid var(--papel);
-    font-weight: 900;
-    font-style: italic;
-    font-stretch: 75%;
-    font-size: 1rem;
-    font-variant-numeric: tabular-nums;
-}
-
 .figurinha__selo {
     position: absolute;
     top: 18px;
@@ -591,6 +571,217 @@ a.figurinha:hover .figurinha__foto img {
 
 .figurinha--short .figurinha__foto {
     aspect-ratio: 9 / 16;
+}
+
+/* ---------- Carta (teste): figurinha com nota e atributos ---------- */
+
+.figurinha--carta {
+    container-type: inline-size;
+    padding: 12px 12px 0;
+    border-radius: 16px;
+    background:
+        radial-gradient(120% 70% at 70% 0%, rgba(110, 64, 240, .45), transparent 60%),
+        var(--tinta);
+    color: var(--papel);
+    box-shadow:
+        inset 0 0 0 2px var(--laranja),
+        inset 0 0 0 6px var(--tinta),
+        inset 0 0 0 7px rgba(255, 122, 26, .45),
+        0 2px 3px rgba(26, 11, 75, .3),
+        0 14px 28px rgba(26, 11, 75, .35);
+}
+
+a.figurinha--carta:hover {
+    box-shadow:
+        inset 0 0 0 2px var(--laranja),
+        inset 0 0 0 6px var(--tinta),
+        inset 0 0 0 7px rgba(255, 122, 26, .45),
+        0 6px 10px rgba(26, 11, 75, .3),
+        0 28px 44px rgba(26, 11, 75, .4);
+}
+
+.figurinha--carta .figurinha__foto {
+    border-radius: 8px;
+}
+
+.figurinha--carta .figurinha__foto::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(26, 11, 75, .85));
+    pointer-events: none;
+}
+
+.carta__nota {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: clamp(8px, 4cqi, 18px) clamp(22px, 11cqi, 56px) 0 clamp(10px, 5cqi, 22px);
+    background: linear-gradient(90deg, rgba(26, 11, 75, .94) 40%, rgba(26, 11, 75, 0));
+    pointer-events: none;
+    transition: opacity .3s var(--ease);
+}
+
+.carta__nota strong {
+    font-size: clamp(2.25rem, 15cqi, 4.75rem);
+    font-weight: 900;
+    font-style: italic;
+    font-stretch: 68%;
+    line-height: .85;
+    color: var(--papel);
+    font-variant-numeric: tabular-nums;
+}
+
+.carta__pos {
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(255, 122, 26, .6);
+    font-size: clamp(.75rem, 4.5cqi, 1.25rem);
+    font-weight: 900;
+    font-stretch: 75%;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--laranja);
+}
+
+.figurinha__foto .carta__canal {
+    width: clamp(24px, 10cqi, 44px);
+    height: auto;
+    transform: none !important;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid var(--papel);
+    object-fit: cover;
+}
+
+.figurinha.is-tocando .carta__nota,
+.figurinha.is-tocando .figurinha__foto::after,
+.figurinha.is-playing .carta__nota,
+.figurinha.is-playing .figurinha__foto::after {
+    opacity: 0;
+}
+
+.carta__nome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 0 clamp(8px, 6cqi, 32px);
+    padding: clamp(10px, 4cqi, 16px) 0 clamp(10px, 3.5cqi, 14px);
+    border-bottom: 1px solid rgba(255, 122, 26, .5);
+    text-align: center;
+}
+
+.carta__nome strong {
+    font-size: clamp(1.375rem, 10cqi, 2.75rem);
+    font-weight: 900;
+    font-style: italic;
+    font-stretch: 70%;
+    text-transform: uppercase;
+    line-height: .9;
+    color: var(--laranja);
+}
+
+.carta__nome span {
+    font-size: clamp(.6875rem, 3.2cqi, .8125rem);
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--lilas);
+}
+
+.carta__stats {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 6px 0;
+    margin: 0 clamp(8px, 6cqi, 32px);
+    padding: clamp(10px, 4cqi, 16px) 0 clamp(26px, 8cqi, 34px);
+}
+
+.carta__stats div {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: clamp(5px, 2.4cqi, 10px);
+    padding-left: clamp(6px, 5cqi, 28px);
+}
+
+.carta__stats div:nth-child(n+4) {
+    border-left: 1px solid rgba(255, 122, 26, .5);
+}
+
+.carta__stats dd {
+    margin: 0;
+    min-width: 2ch;
+    font-size: clamp(1.125rem, 7cqi, 1.875rem);
+    font-weight: 900;
+    font-stretch: 75%;
+    line-height: 1;
+    color: var(--papel);
+    font-variant-numeric: tabular-nums;
+}
+
+.carta__stats dt {
+    font-size: clamp(.5625rem, 3.3cqi, .9375rem);
+    font-weight: 800;
+    font-stretch: 80%;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--lilas);
+}
+
+.carta__stats::after {
+    content: "";
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    width: 72px;
+    height: 2px;
+    background: var(--laranja);
+    transform: translateX(-50%);
+}
+
+.carta__stats dt {
+    white-space: nowrap;
+}
+
+/* carta estreita: "After Effects" vira "After" */
+@container (max-width: 360px) {
+    .carta__longo {
+        display: none;
+    }
+}
+
+/* selo "Especial" em laranja para não sumir no fundo tinta da carta */
+.figurinha--carta .figurinha__selo {
+    background: var(--laranja);
+    color: var(--tinta);
+}
+
+/* verticais e a 00: a nota fica só no canto de cima */
+.figurinha--short .carta__nota,
+.figurinha--lenda .carta__nota {
+    bottom: auto;
+    padding-bottom: clamp(14px, 8cqi, 28px);
+    padding-right: clamp(26px, 14cqi, 48px);
+    border-radius: 8px 0 0 0;
+    background: radial-gradient(120% 120% at 0 0, rgba(26, 11, 75, .92) 45%, rgba(26, 11, 75, 0) 75%);
+}
+
+.sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
 
 /* brilho holográfico */
@@ -1041,7 +1232,8 @@ a.figurinha:focus-visible .play {
         grid-column: 1;
         grid-row: 3;
         width: min(68%, 270px);
-        margin: -60px 0 0 auto;
+        /* encosta no "SENA" sem tapar a nota da carta */
+        margin: -24px 0 0 auto;
         margin-right: 14%;
     }
 

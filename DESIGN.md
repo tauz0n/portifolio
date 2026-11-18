@@ -21,7 +21,8 @@ Archivo variável (Google Fonts, eixos wdth 62–125 + itálico).
 - A capa passa do limite de display de propósito (até 14.5rem), para dar impacto.
 
 ## Componentes
-- `.figurinha`: borda de papel, `.figurinha__faixa` laranja com título, `.figurinha__num` (círculo tinta), `.figurinha__selo` opcional. A rotação vem de `--r`.
+- `.figurinha`: borda de papel, `.figurinha__faixa` laranja com título, `.figurinha__selo` opcional. As cartas não têm número. A rotação vem de `--r`.
+- `.figurinha--carta`: a 00 da capa e os trabalhos (01–06) são cartas de jogador. Fundo tinta com moldura laranja dupla, `.carta__nota` no canto da foto (nota geral, posição = formato, escudo do canal opcional), `.carta__nome` e `dl.carta__stats` com seis atributos em duas colunas. Os tamanhos usam `cqi` (a carta é container), então funcionam na carta grande e nas pequenas. Em carta estreita, "After Effects" vira "After" (`.carta__longo`). A nota some quando o vídeo toca.
 - `.brilho`: foil holográfico (color-dodge) que se intensifica com `--foil`.
 - `.escudo`: brasão dos times.
 - `.faixa`: marquee laranja inclinado com os estilos de vídeo editados (videoclipes, curta-metragem, gameplay, vlogs, shorts, TikTok).
