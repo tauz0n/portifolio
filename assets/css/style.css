@@ -897,6 +897,18 @@ a.figurinha:focus-visible .play {
     padding: clamp(32px, 6vw, 72px);
     border-radius: 24px;
     background: var(--tinta);
+    --rx: 0deg;
+    --ry: 0deg;
+    transform: perspective(1600px) rotateX(var(--rx)) rotateY(var(--ry));
+    box-shadow: 0 10px 24px rgba(26, 11, 75, .25);
+    transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+
+/* o painel inteiro flutua seguindo o mouse */
+.fim[data-tilt]:hover {
+    box-shadow:
+        0 8px 16px rgba(26, 11, 75, .3),
+        0 34px 60px rgba(26, 11, 75, .45);
 }
 
 .slot--vazio {
@@ -911,6 +923,12 @@ a.figurinha:focus-visible .play {
     background: var(--tinta-suave);
     color: rgba(217, 204, 255, .65);
     transform: rotate(-2deg);
+    position: relative;
+}
+
+/* holográfico só na carta 07, mais forte que nas figurinhas */
+.slot--vazio.brilho::after {
+    opacity: calc(var(--foil) * .65);
 }
 
 .slot__numero {

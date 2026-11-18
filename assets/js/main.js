@@ -44,21 +44,27 @@
     /* Tilt + brilho holográfico seguindo o ponteiro */
     if (ponteiroFino && !reduz) {
         document.querySelectorAll('[data-tilt]').forEach((el) => {
+            /* data-tilt="5" deixa a inclinação mais suave; data-tilt-brilho aponta onde fica o holográfico */
+            const forca = parseFloat(el.dataset.tilt) || 14;
+            const brilho = (el.dataset.tiltBrilho && el.querySelector(el.dataset.tiltBrilho)) || el;
             el.addEventListener('pointermove', (ev) => {
                 if (el.classList.contains('is-tocando')) return;
                 const r = el.getBoundingClientRect();
                 const x = (ev.clientX - r.left) / r.width;
                 const y = (ev.clientY - r.top) / r.height;
-                el.style.setProperty('--ry', ((x - 0.5) * 14).toFixed(2) + 'deg');
-                el.style.setProperty('--rx', ((0.5 - y) * 14).toFixed(2) + 'deg');
-                el.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
-                el.style.setProperty('--my', (y * 100).toFixed(1) + '%');
-                el.style.setProperty('--foil', '1');
+                el.style.setProperty('--ry', ((x - 0.5) * forca).toFixed(2) + 'deg');
+                el.style.setProperty('--rx', ((0.5 - y) * forca).toFixed(2) + 'deg');
+                const b = brilho === el ? r : brilho.getBoundingClientRect();
+                const bx = Math.min(1, Math.max(0, (ev.clientX - b.left) / b.width));
+                const by = Math.min(1, Math.max(0, (ev.clientY - b.top) / b.height));
+                brilho.style.setProperty('--mx', (bx * 100).toFixed(1) + '%');
+                brilho.style.setProperty('--my', (by * 100).toFixed(1) + '%');
+                brilho.style.setProperty('--foil', '1');
             });
             el.addEventListener('pointerleave', () => {
                 el.style.setProperty('--rx', '0deg');
                 el.style.setProperty('--ry', '0deg');
-                el.style.setProperty('--foil', '0');
+                brilho.style.setProperty('--foil', '0');
             });
         });
     }
