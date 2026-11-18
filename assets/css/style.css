@@ -1395,6 +1395,16 @@ a.figurinha:focus-visible .play {
     initial-value: 0;
 }
 
+/* com o pacote fechado, o slot tracejado não aparece atrás dele */
+.slot--vazio.tem-pacote {
+    transition: border-color .35s ease-out .35s, background-color .35s ease-out .35s;
+}
+
+.slot--vazio.tem-pacote:not(.is-revelado) {
+    border-color: transparent;
+    background-color: transparent;
+}
+
 .slot--vazio.tem-pacote .slot__legenda {
     opacity: 0;
     transform: scale(.6) rotate(-8deg);
@@ -1885,4 +1895,289 @@ html.puxando-ziper * {
     *::after {
         transition-duration: .01ms !important;
     }
+}
+
+/* =========================================================
+   Rodada teste: do "Trabalhos" para baixo vira página de álbum
+   (tudo escopado em .album; remover a classe do <main> desfaz)
+   ========================================================= */
+
+.album {
+    --papel-linha: rgba(26, 11, 75, .16);
+    position: relative;
+    isolation: isolate;
+    max-width: calc(var(--max) + 80px);
+    margin: clamp(56px, 8vw, 112px) clamp(10px, 2.4vw, 40px) clamp(48px, 6vw, 88px);
+    color: var(--tinta);
+    border-radius: 4px 14px 14px 4px;
+    background-color: var(--papel);
+    background-image:
+        /* fibras do papel */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .04 0 0 0 0 .3 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E"),
+        /* retícula de impressão, bem leve */
+        radial-gradient(rgba(91, 43, 224, .09) 1px, transparent 1.5px);
+    background-size: 180px 180px, 12px 12px;
+    box-shadow:
+        /* folhas empilhadas por baixo */
+        5px 5px 0 -1px var(--papel-sombra),
+        10px 10px 0 -2px #D9C7A8,
+        15px 15px 0 -3px #C9B592,
+        0 30px 60px rgba(26, 11, 75, .45);
+}
+
+@media (min-width: 1321px) {
+    .album {
+        margin-inline: auto;
+    }
+}
+
+/* lombada: sombra da dobra na borda esquerda */
+.album::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: clamp(18px, 4vw, 56px);
+    border-radius: 4px 0 0 4px;
+    background: linear-gradient(90deg,
+            rgba(26, 11, 75, .28),
+            rgba(26, 11, 75, .08) 45%,
+            rgba(255, 255, 255, .35) 70%,
+            transparent);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* rodapé impresso da página */
+.album::after {
+    content: "Tauan Sena · Álbum oficial 2026";
+    position: absolute;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    font-size: .6875rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: rgba(26, 11, 75, .45);
+    pointer-events: none;
+}
+
+.album .pagina__topo {
+    border-bottom-color: var(--papel-linha);
+}
+
+.album .pagina__topo h2 {
+    color: var(--tinta);
+}
+
+.album .pagina__intro {
+    color: var(--tinta-suave);
+}
+
+/* ---------- quadros impressos onde as figurinhas são coladas ---------- */
+
+.album {
+    counter-reset: figurinha;
+}
+
+.album .trabalhos .slot,
+.album .shorts .slot,
+.album .escudos li {
+    position: relative;
+    isolation: isolate;
+    counter-increment: figurinha;
+}
+
+.album .trabalhos .slot::before,
+.album .shorts .slot::before,
+.album .escudos li::before {
+    content: "";
+    position: absolute;
+    inset: -12px -12px -40px;
+    z-index: -1;
+    border-radius: 14px;
+    border: 2px solid rgba(26, 11, 75, .2);
+    background:
+        repeating-linear-gradient(135deg,
+            rgba(91, 43, 224, .06) 0 6px,
+            transparent 6px 12px),
+        rgba(26, 11, 75, .05);
+}
+
+.album .trabalhos .slot::after,
+.album .shorts .slot::after,
+.album .escudos li::after {
+    content: "Nº " counter(figurinha, decimal-leading-zero);
+    position: absolute;
+    right: 2px;
+    bottom: -32px;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    color: rgba(26, 11, 75, .55);
+    font-variant-numeric: tabular-nums;
+}
+
+.album .escudos li::before {
+    inset: -12px -12px -40px;
+    border-radius: 22px 22px 98px 98px;
+}
+
+.album .escudos li::after {
+    right: 50%;
+    transform: translateX(50%);
+}
+
+/* mais espaço por causa do número embaixo de cada quadro */
+.album .trabalhos {
+    row-gap: 72px;
+}
+
+.album .shorts {
+    row-gap: 72px;
+}
+
+.album .escudos {
+    row-gap: 72px;
+}
+
+.album .pagina--fim {
+    padding-bottom: clamp(96px, 11vw, 150px);
+}
+
+@media (max-width: 600px) {
+    .album .trabalhos .slot::before,
+    .album .shorts .slot::before,
+    .album .escudos li::before {
+        inset: -8px -8px -34px;
+    }
+
+    .album .trabalhos .slot::after,
+    .album .shorts .slot::after,
+    .album .escudos li::after {
+        bottom: -28px;
+    }
+}
+
+.album .trabalhos .slot {
+    align-self: start;
+}
+
+/* o painel de contato continua escuro, então o texto volta a ser claro */
+.album .fim {
+    color: var(--papel);
+}
+
+/* =========================================================
+   Pacote com volume 3D: estufado, lacres prensados,
+   reflexo que segue o ponteiro e inclinação própria
+   ========================================================= */
+
+@property --balanco {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.pacote {
+    /* herda --rx/--ry do painel (.fim) e --mx/--my/--foil do slot */
+    transform:
+        perspective(900px)
+        rotateX(calc(var(--rx, 0deg) * 2.4))
+        rotateY(calc(var(--ry, 0deg) * 2.8 + var(--balanco)))
+        rotate(calc(var(--vel, 0) * 3deg))
+        translateX(calc(var(--vel, 0) * 4px));
+    filter:
+        drop-shadow(0 2px 0 rgba(26, 11, 75, .5))
+        drop-shadow(0 18px 22px rgba(0, 0, 0, .4));
+    transition: --abre .45s var(--ease), transform .4s var(--ease);
+    animation: pacote-balanca 6s ease-in-out infinite;
+}
+
+/* com o mouse em cima, quem manda é a inclinação */
+.fim:hover .pacote {
+    animation-play-state: paused;
+}
+
+@keyframes pacote-balanca {
+    0%, 100% { --balanco: -6deg; }
+    50% { --balanco: 6deg; }
+}
+
+/* aba de cima: lacre prensado + laterais afundando */
+.pacote__topo {
+    background:
+        repeating-linear-gradient(90deg, rgba(26, 11, 75, .2) 0 2px, transparent 2px 5px)
+            top / 100% calc(var(--z) + 16px) no-repeat,
+        linear-gradient(rgba(26, 11, 75, .28), transparent calc(var(--z) + 22px)),
+        linear-gradient(90deg, rgba(26, 11, 75, .4), transparent 11%, rgba(255, 255, 255, .16) 20%,
+            transparent 34%, transparent 86%, rgba(26, 11, 75, .45)),
+        linear-gradient(transparent 55%, rgba(26, 11, 75, .32)),
+        linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .35) 45%, transparent 60%)
+            var(--mx) 0 / 220% 100% no-repeat,
+        var(--laranja-escuro);
+}
+
+/* corpo: estufado no meio, lacre embaixo, reflexo que acompanha o mouse */
+.pacote__corpo {
+    background:
+        radial-gradient(ellipse 65% 45% at var(--mx) var(--my),
+            rgb(255 255 255 / calc(.1 + var(--foil) * .38)), transparent 70%),
+        repeating-linear-gradient(90deg, rgba(26, 11, 75, .18) 0 2px, transparent 2px 5px)
+            bottom / 100% calc(var(--z) + 16px) no-repeat,
+        linear-gradient(to top, rgba(26, 11, 75, .26), transparent calc(var(--z) + 24px)),
+        linear-gradient(90deg, rgba(26, 11, 75, .4), rgba(26, 11, 75, 0) 10%, rgba(255, 255, 255, .22) 18%,
+            transparent 34%, transparent 70%, rgba(255, 255, 255, .1) 84%, rgba(26, 11, 75, .45)),
+        linear-gradient(rgba(26, 11, 75, .2), transparent 12%, rgba(255, 255, 255, .12) 30%,
+            transparent 55%, transparent 78%, rgba(26, 11, 75, .2)),
+        linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, .42) 38%, transparent 52%)
+            var(--mx) 0 / 220% 100% no-repeat,
+        repeating-linear-gradient(-35deg, transparent 0 22px, rgba(91, 43, 224, .14) 22px 44px),
+        var(--laranja);
+}
+
+/* título em relevo, como impressão em alto-relevo */
+.pacote__titulo {
+    text-shadow:
+        0 -1px 0 rgba(255, 255, 255, .45),
+        1px 1px 0 #3A18A8,
+        2px 2px 0 #3A18A8,
+        3px 3px 0 var(--tinta),
+        4px 6px 10px rgba(26, 11, 75, .35);
+}
+
+.pacote__conteudo {
+    box-shadow: 0 2px 0 rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pacote {
+        animation: none;
+    }
+}
+
+/* enquanto o pacote está fechado, o holográfico do slot sai e o brilho fica no próprio pacote */
+.slot--vazio.tem-pacote:not(.is-revelado).brilho::after {
+    opacity: 0;
+}
+
+.pacote__topo::after,
+.pacote__corpo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(115deg,
+            transparent 22%,
+            #ff9de2 34%,
+            #9ee8ff 44%,
+            #fff59e 54%,
+            #b49bff 64%,
+            transparent 78%)
+        var(--mx) var(--my) / 260% 260% no-repeat;
+    mix-blend-mode: soft-light;
+    opacity: calc(.15 + var(--foil) * .7);
+    transition: opacity .4s var(--ease);
 }
