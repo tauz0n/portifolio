@@ -100,8 +100,7 @@
             if (!pendente) { pendente = true; requestAnimationFrame(atualizar); }
         }, { passive: true });
         addEventListener('resize', atualizar);
-        /* primeira marcação no próximo quadro, sem forçar layout durante o carregamento */
-        requestAnimationFrame(atualizar);
+        atualizar();
     }
 
     /* Trabalhos: o vídeo do YouTube toca dentro da própria figurinha */
